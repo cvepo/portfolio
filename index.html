@@ -28,6 +28,8 @@
   --tag-purple-bg: #1a1530; --tag-purple: #a48ef5;
   --tag-pink-bg: #281020; --tag-pink: #f07ab8;
   --tag-teal-bg: #0a2022; --tag-teal: #4dcbb8;
+  --heading-glow: rgba(238, 237, 232, 0.55);
+  --heading-glow-soft: rgba(238, 237, 232, 0.18);
 }
 
 [data-theme="light"] {
@@ -46,6 +48,8 @@
   --tag-purple-bg: #f0eefb; --tag-purple: #5a42b5;
   --tag-pink-bg: #fceef5; --tag-pink: #b0387a;
   --tag-teal-bg: #e4f5f2; --tag-teal: #1e7a6a;
+  --heading-glow: rgba(26, 26, 24, 0.35);
+  --heading-glow-soft: rgba(26, 26, 24, 0.12);
 }
 
 html { scroll-behavior: smooth; }
@@ -63,7 +67,7 @@ body {
 /* Centered shell: nav + main as one block */
 .layout {
   display: flex;
-  width: min(1080px, calc(100vw - 40px));
+  width: min(1240px, calc(100vw - 32px));
   margin-inline: auto;
   min-height: 100vh;
   box-sizing: border-box;
@@ -260,6 +264,15 @@ section { padding-top: 88px; }
   color: var(--text-3);
   margin-bottom: 24px;
   margin-top: 4px;
+  transition: color 0.55s ease, text-shadow 0.65s ease, filter 0.65s ease;
+}
+.section-label.section-label--glow {
+  color: var(--text-2);
+  text-shadow:
+    0 0 12px var(--heading-glow-soft),
+    0 0 28px var(--heading-glow),
+    0 0 48px var(--heading-glow-soft);
+  filter: drop-shadow(0 0 1px var(--heading-glow-soft));
 }
 
 /* REVEAL */
@@ -277,6 +290,12 @@ section { padding-top: 88px; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+  .section-label { transition: none; }
+  .section-label.section-label--glow {
+    text-shadow: none;
+    filter: none;
+    color: var(--text-2);
+  }
 }
 
 /* ABOUT */
@@ -337,9 +356,10 @@ section { padding-top: 88px; }
 
 /* PROJECTS */
 .project-card {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 22px 24px;
+  padding: 22px 48px 22px 24px;
   margin-bottom: 10px;
   background: var(--bg2);
   transition: border-color 0.2s, background 0.2s, transform 0.2s;
@@ -349,6 +369,93 @@ section { padding-top: 88px; }
   border-color: var(--border-strong);
   background: var(--surface);
   transform: translateY(-2px);
+}
+.project-card-external {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.project-card-external:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+.project-repo-wrap {
+  position: absolute;
+  top: 16px;
+  right: 14px;
+  outline: none;
+}
+.project-repo-wrap:focus-visible {
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--border-strong);
+}
+.project-repo-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.project-repo-wrap:hover .project-repo-trigger,
+.project-repo-wrap:focus-within .project-repo-trigger {
+  color: var(--text);
+  background: var(--surface2);
+}
+.project-repo-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 11rem;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 20;
+  pointer-events: none;
+}
+[data-theme="dark"] .project-repo-dropdown {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.project-repo-wrap:hover .project-repo-dropdown,
+.project-repo-wrap:focus-within .project-repo-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.project-repo-dropdown a {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: -0.01em;
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: color 0.12s, background 0.12s;
+}
+.project-repo-dropdown a:hover {
+  color: var(--text);
+  background: var(--surface2);
 }
 .project-name {
   font-family: 'Geist Mono', monospace;
@@ -382,6 +489,16 @@ section { padding-top: 88px; }
 .exp-item:first-child { border-top: 1px solid var(--border); }
 .exp-role { font-size: 14px; font-weight: 500; color: var(--text); }
 .exp-org { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.exp-org a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.15s, border-color 0.15s;
+}
+.exp-org a:hover {
+  color: var(--text);
+  border-bottom-color: var(--text-3);
+}
 .exp-date {
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
@@ -517,7 +634,7 @@ footer {
       <p class="offline-label">Offline</p>
       <div class="offline-list">
         <span class="offline-item" style="background:var(--tag-blue-bg);color:var(--tag-blue);">
-          <span class="dot" style="background:var(--tag-blue);"></span>CAPSU · Director of Internal Affairs
+          <span class="dot" style="background:var(--tag-blue);"></span>Cornell Asian Pacific Union · Director of Internal Affairs
         </span>
         <span class="offline-item" style="background:var(--tag-green-bg);color:var(--tag-green);">
           <span class="dot" style="background:var(--tag-green);"></span>Google Developer Group · Chapter Founder
@@ -531,6 +648,9 @@ footer {
   <section id="projects">
     <p class="section-label reveal">Projects</p>
     <div class="project-card reveal reveal-delay-1">
+      <a href="https://github.com/cornellh4i/CHEM" target="_blank" rel="noopener noreferrer" class="project-card-external" aria-label="CHEM on GitHub">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
       <p class="project-name">CHEM — Endowment Manager</p>
       <p class="project-desc">Fullstack endowment management system for Cornell Hack4Impact — optimizing fund allocation, tracking performance, and ensuring compliance for real organizational clients.</p>
       <div class="tag-row">
@@ -541,6 +661,15 @@ footer {
       </div>
     </div>
     <div class="project-card reveal reveal-delay-2">
+      <div class="project-repo-wrap">
+        <button type="button" class="project-repo-trigger" aria-label="Uplift GitHub repositories" aria-haspopup="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </button>
+        <div class="project-repo-dropdown" role="menu">
+          <a role="menuitem" href="https://github.com/cuappdev/uplift-ios-swiftui" target="_blank" rel="noopener noreferrer">iOS · SwiftUI</a>
+          <a role="menuitem" href="https://github.com/cuappdev/uplift-backend" target="_blank" rel="noopener noreferrer">Backend</a>
+        </div>
+      </div>
       <p class="project-name">Uplift</p>
       <p class="project-desc">Campus fitness app aggregating gym hours, capacity, and class schedules across Cornell's facilities — grown through targeted launches and iterative feature development.</p>
       <div class="tag-row">
@@ -557,7 +686,7 @@ footer {
   <section id="experience">
     <p class="section-label reveal">Experience</p>
     <div class="exp-item reveal reveal-delay-1">
-      <div><p class="exp-role">Associate Product Manager</p><p class="exp-org">Cornell AppDev</p></div>
+      <div><p class="exp-role">Associate Product Manager</p><p class="exp-org"><a href="https://www.cornellappdev.com/" target="_blank" rel="noopener noreferrer">Cornell AppDev</a></p></div>
       <p class="exp-date">2024 – present</p>
       <div class="exp-tags">
         <span class="tag" style="background:var(--tag-pink-bg);color:var(--tag-pink);">Product</span>
@@ -565,7 +694,7 @@ footer {
       </div>
     </div>
     <div class="exp-item reveal reveal-delay-2">
-      <div><p class="exp-role">Developer</p><p class="exp-org">Hack4Impact @ Cornell</p></div>
+      <div><p class="exp-role">Developer</p><p class="exp-org"><a href="https://www.cornellh4i.org/" target="_blank" rel="noopener noreferrer">Hack4Impact @ Cornell</a></p></div>
       <p class="exp-date">2024 – present</p>
       <div class="exp-tags">
         <span class="tag" style="background:var(--tag-purple-bg);color:var(--tag-purple);">Fullstack</span>
@@ -573,7 +702,7 @@ footer {
       </div>
     </div>
     <div class="exp-item reveal reveal-delay-3">
-      <div><p class="exp-role">Software Engineer Intern</p><p class="exp-org">Timing</p></div>
+      <div><p class="exp-role">Software Engineer Intern</p><p class="exp-org"><a href="https://gettiming.com/" target="_blank" rel="noopener noreferrer">Timing</a></p></div>
       <p class="exp-date">–</p>
       <div class="exp-tags">
         <span class="tag" style="background:var(--tag-blue-bg);color:var(--tag-blue);">SWE</span>
@@ -581,7 +710,7 @@ footer {
       </div>
     </div>
     <div class="exp-item reveal reveal-delay-4">
-      <div><p class="exp-role">Social Media Intern</p><p class="exp-org">Arab Studies Institute</p></div>
+      <div><p class="exp-role">Social Media Intern</p><p class="exp-org"><a href="https://www.jadaliyya.com/" target="_blank" rel="noopener noreferrer">Arab Studies Institute / Jadaliyya Project</a></p></div>
       <p class="exp-date">–</p>
       <div class="exp-tags">
         <span class="tag" style="background:var(--tag-amber-bg);color:var(--tag-amber);">Marketing</span>
@@ -589,7 +718,7 @@ footer {
       </div>
     </div>
     <div class="exp-item reveal reveal-delay-5">
-      <div><p class="exp-role">Operations Intern</p><p class="exp-org">U.S. Department of Justice · Community Relations Service</p></div>
+      <div><p class="exp-role">Operations Intern</p><p class="exp-org"><a href="https://www.justice.gov/crs" target="_blank" rel="noopener noreferrer">U.S. Department of Justice · Community Relations Service</a></p></div>
       <p class="exp-date">–</p>
       <div class="exp-tags">
         <span class="tag" style="background:var(--tag-blue-bg);color:var(--tag-blue);">Operations</span>
@@ -685,6 +814,15 @@ footer {
   }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
   sections.forEach(section => navObserver.observe(section));
+
+  const sectionLabels = document.querySelectorAll('.section-label');
+  const labelGlowObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('section-label--glow', entry.isIntersecting);
+    });
+  }, { threshold: 0.35, rootMargin: '-8% 0px -45% 0px' });
+
+  sectionLabels.forEach((el) => labelGlowObserver.observe(el));
 </script>
 </body>
 </html>
