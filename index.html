@@ -173,6 +173,14 @@ body {
   border-color: var(--border-strong);
   background: var(--surface);
 }
+.theme-btn svg {
+  flex-shrink: 0;
+}
+.theme-icon--light {
+  transform: scaleY(-1);
+  transform-origin: center;
+  transition: transform 0.35s ease;
+}
 
 /* MAIN */
 main {
@@ -483,10 +491,20 @@ section { padding-top: 88px; }
   grid-template-columns: 1fr auto;
   gap: 2px 16px;
   padding: 18px 0;
-  border-bottom: 1px solid var(--border);
   align-items: start;
+  position: relative;
 }
-.exp-item:last-child { border-bottom: none; }
+/* Shorter than full-width section dividers; centered in the main column */
+.exp-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(58%, 20rem);
+  height: 1px;
+  background: var(--border);
+}
 .exp-role { font-size: 14px; font-weight: 500; color: var(--text); }
 .exp-org { font-size: 13px; color: var(--text-2); margin-top: 2px; }
 .exp-org a {
@@ -506,8 +524,6 @@ section { padding-top: 88px; }
   white-space: nowrap;
   padding-top: 3px;
 }
-.exp-tags { grid-column: 1 / -1; display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
-
 /* CONTACT */
 .contact-block {
   background: var(--surface);
@@ -586,8 +602,17 @@ footer {
   </ul>
   <div class="nav-bottom">
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
-      <svg id="themeIcon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M8 12a4 4 0 100-8 4 4 0 000 8zm0 1.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11zM8 1a.75.75 0 01.75.75v1a.75.75 0 01-1.5 0v-1A.75.75 0 018 1zm0 12.5a.75.75 0 01.75.75v1a.75.75 0 01-1.5 0v-1A.75.75 0 018 13.5zM1 8a.75.75 0 01.75-.75h1a.75.75 0 010 1.5h-1A.75.75 0 011 8zm12.5 0a.75.75 0 01.75-.75h1a.75.75 0 010 1.5h-1A.75.75 0 0113.5 8z"/>
+      <svg id="themeIcon" class="theme-icon--dark" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="9.75" stroke="currentColor" stroke-width="1.2"/>
+        <!-- Twin koi bodies forming taiji S -->
+        <path d="M12 2.25c4.35 1.15 7.75 5.05 7.75 9.75S16.35 20.6 12 21.75" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 21.75c-4.35-1.15-7.75-5.05-7.75-9.75S7.65 3.4 12 2.25" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Tail fins -->
+        <path d="M17.35 6.25L19.4 4.85M18.05 8.35l2.35-.55" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        <path d="M6.65 17.75L4.6 19.15M5.95 15.65l-2.35.55" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        <!-- Eyes -->
+        <circle cx="12" cy="7.85" r="1.1" fill="currentColor"/>
+        <circle cx="12" cy="16.15" r="1.1" fill="currentColor"/>
       </svg>
       <span id="themeLabel">light</span>
     </button>
@@ -728,7 +753,7 @@ footer {
         </a>
         <a href="https://calendly.com/enzohiu06/30min" target="_blank" rel="noopener noreferrer" class="pill-link">
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><rect x="2.5" y="3" width="11" height="11" rx="1"/><path d="M2.5 6.5h11M5.5 1.5V4M10.5 1.5V4"/></svg>
-          schedule
+          coffechat!
         </a>
       </div>
     </div>
@@ -750,14 +775,12 @@ footer {
   const icon = document.getElementById('themeIcon');
   const html = document.documentElement;
 
-  const sunPath = '<path d="M8 12a4 4 0 100-8 4 4 0 000 8zm0 1.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11zM8 1a.75.75 0 01.75.75v1a.75.75 0 01-1.5 0v-1A.75.75 0 018 1zm0 12.5a.75.75 0 01.75.75v1a.75.75 0 01-1.5 0v-1A.75.75 0 018 13.5zM1 8a.75.75 0 01.75-.75h1a.75.75 0 010 1.5h-1A.75.75 0 011 8zm12.5 0a.75.75 0 01.75-.75h1a.75.75 0 010 1.5h-1A.75.75 0 0113.5 8z"/>';
-  const moonPath = '<path d="M8 2a6 6 0 100 12A6 6 0 008 2zm-7 6a7 7 0 0112.45-4.36A5 5 0 007.09 9.95 7 7 0 011 8z"/>';
-
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
     const isDark = theme === 'dark';
     label.textContent = isDark ? 'light' : 'dark';
-    icon.innerHTML = isDark ? sunPath : moonPath;
+    icon.classList.toggle('theme-icon--dark', isDark);
+    icon.classList.toggle('theme-icon--light', !isDark);
     try { localStorage.setItem('theme', theme); } catch (_) {}
   }
 
