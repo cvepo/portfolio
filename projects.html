@@ -66,7 +66,7 @@ html, body {
   position: fixed; top: 0; left: 0; bottom: 0; width: 192px;
   padding: 48px 0 40px 28px; display: flex; flex-direction: column;
   border-right: 1px solid var(--border); background: var(--bg);
-  transition: background var(--transition), border-color var(--transition); z-index: 100;
+  transition: background var(--transition), border-color var(--transition); z-index: 400;
 }
 .nav-name { font-family: 'Geist Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: -0.02em; margin-bottom: 40px; }
 .nav-links { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
@@ -90,28 +90,25 @@ html, body {
 .theme-btn:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface); }
 
 /* ── SCENE ── */
-.scene-wrap { position: fixed; top: 0; left: 192px; right: 0; bottom: 0; overflow: hidden; }
+.scene-wrap { position: fixed; top: 0; left: 192px; right: 0; bottom: 0; overflow: hidden; z-index: 1; }
 .scene { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: grab; user-select: none; position: relative; }
 .scene:active { cursor: grabbing; }
 
-.drag-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-3); letter-spacing: 0.05em; pointer-events: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.7s ease; white-space: nowrap; }
+.drag-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-3); letter-spacing: 0.05em; pointer-events: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.7s ease; white-space: nowrap; z-index: 10; opacity: 0; }
 .hint-arrow { flex-shrink: 0; display: block; color: var(--text-3); opacity: 0.9; }
 .hint-arrow path { stroke: currentColor; }
 
-.back-link { position: absolute; top: 36px; left: 36px; font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-3); text-decoration: none; letter-spacing: 0.02em; display: flex; align-items: center; gap: 7px; transition: color 0.15s; z-index: 10; }
-.back-link:hover { color: var(--text); }
-.project-count { position: absolute; top: 40px; right: 40px; font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-3); letter-spacing: 0.04em; z-index: 10; }
-
 /* ── CARDS ── */
-.card { position: absolute; width: 256px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 22px 22px 18px; cursor: pointer; will-change: transform, opacity; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-card); }
+.card { position: absolute; width: 256px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 22px 22px 18px; cursor: pointer; will-change: transform, opacity; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-card); z-index: 1; }
 .card:hover { border-color: var(--border-strong); background: var(--surface); box-shadow: var(--shadow-card-hover); }
 .card-tag { display: inline-flex; align-items: center; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 4px; margin-bottom: 11px; }
 .card-title { font-family: 'Instrument Serif', serif; font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
 .card-desc { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 13px; }
 .card-stack { display: flex; flex-wrap: wrap; gap: 4px; }
 .stack-pill { font-family: 'Geist Mono', monospace; font-size: 10px; color: var(--text-3); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; }
-.card-arrow { position: absolute; top: 16px; right: 18px; font-size: 11px; color: var(--text-3); transition: color 0.15s, transform 0.15s; }
-.card:hover .card-arrow { color: var(--text-2); transform: translate(2px,-2px); }
+.card-arrow { position: absolute; top: 16px; right: 18px; font-size: 11px; color: var(--text-3); transition: color 0.15s, transform 0.15s, opacity 0.2s ease; opacity: 0; pointer-events: none; }
+.card--primed .card-arrow { opacity: 1; }
+.card--primed:hover .card-arrow { color: var(--text-2); transform: translate(2px,-2px); }
 
 /* tag colour classes — add more as needed */
 .t-green  { background: var(--tag-green-bg);  color: var(--tag-green); }
@@ -123,9 +120,9 @@ html, body {
 .t-red    { background: var(--tag-red-bg);    color: var(--tag-red); }
 
 /* ── PANEL ── */
-.panel-scrim { position: fixed; inset: 0 0 0 192px; pointer-events: none; z-index: 200; }
+.panel-scrim { position: fixed; inset: 0 0 0 192px; pointer-events: none; z-index: 350; }
 .panel-scrim.open { pointer-events: all; }
-.panel { position: absolute; top: 0; right: 0; bottom: 0; width: 440px; background: var(--bg); border-left: 1px solid var(--border); box-shadow: var(--shadow-panel); transform: translateX(100%); transition: transform 0.38s cubic-bezier(0.16,1,0.3,1); display: flex; flex-direction: column; overflow-y: auto; }
+.panel { position: absolute; top: 0; right: 0; bottom: 0; width: 440px; background: var(--bg); border-left: 1px solid var(--border); box-shadow: var(--shadow-panel); transform: translateX(100%); transition: transform 0.38s cubic-bezier(0.16,1,0.3,1); display: flex; flex-direction: column; overflow-y: auto; z-index: 1; }
 .panel.open { transform: translateX(0); }
 .panel-body-wrap { padding: 52px 36px 52px; flex: 1; }
 .panel-close { position: absolute; top: 20px; right: 22px; background: none; border: 1px solid var(--border); color: var(--text-3); font-family: 'Geist Mono', monospace; font-size: 11px; padding: 5px 9px; border-radius: 6px; cursor: pointer; letter-spacing: 0.02em; transition: color 0.15s, border-color 0.15s, background 0.15s; }
@@ -191,8 +188,6 @@ html, body {
 
 <div class="scene-wrap">
   <div class="scene" id="scene">
-    <a href="index.html#top" class="back-link">← index</a>
-    <span class="project-count" id="project-count"></span>
     <div class="drag-hint" id="drag-hint">
       <svg class="hint-arrow" width="22" height="10" viewBox="0 0 22 10" fill="none" aria-hidden="true">
         <path d="M20 5H6M6 5l4-3.5M6 5l4 3.5" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"/>
@@ -227,12 +222,16 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
 });
 
-// load projects.json and boot
+// load projects.json and boot (pad to 10 cards for layout preview — cycle real entries)
 fetch("projects.json")
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(boot)
+  .then((data) => {
+    if (!data.length) throw new Error("no projects");
+    const n = 10;
+    const padded = Array.from({ length: n }, (_, i) => data[i % data.length]);
+    boot(padded);
+  })
   .catch(err => {
-    document.getElementById("project-count").textContent = "couldn't load projects.json";
     console.error("projects.json load error:", err);
   });
 
@@ -243,25 +242,122 @@ function boot(PROJECTS) {
   const panel = document.getElementById("panel");
   const pbody = document.getElementById("panel-body");
 
-  document.getElementById("project-count").textContent = PROJECTS.length + " projects";
-
   const DRAG_ACCEL = 0.22;
   const FRICTION = 0.935;
   const MAX_VEL = 0.055;
   const DRAG_SCALE = 0.006;
 
+  /** Delay before the entrance timeline starts so layout/paint can settle (reduces rAF clumping). */
+  const ANIMATION_PREROLL_MS = 220;
+  const bootT0 = performance.now() + ANIMATION_PREROLL_MS;
+  const CARD_ENTER_MS = 800;
+  const CARD_STAGGER_MS = 140;
+  const CARD_FIRST_MS = 150;
+  const HINT_AFTER_LAST_MS = 200;
+  const HINT_FADE_MS = 500;
+
+  function cubicBezierXY(x1, y1, x2, y2) {
+    function sampleX(t) {
+      return 3 * (1 - t) * (1 - t) * t * x1 + 3 * (1 - t) * t * t * x2 + t * t * t;
+    }
+    function sampleY(t) {
+      return 3 * (1 - t) * (1 - t) * t * y1 + 3 * (1 - t) * t * t * y2 + t * t * t;
+    }
+    return function (x) {
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      let lo = 0, hi = 1;
+      for (let i = 0; i < 14; i++) {
+        const mid = (lo + hi) * 0.5;
+        if (sampleX(mid) < x) lo = mid;
+        else hi = mid;
+      }
+      const t = (lo + hi) * 0.5;
+      return sampleY(t);
+    };
+  }
+  const enterEaseY = cubicBezierXY(0.22, 1, 0.36, 1);
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  const lastCardLandMs = PROJECTS.length > 0
+    ? CARD_FIRST_MS + (PROJECTS.length - 1) * CARD_STAGGER_MS + CARD_ENTER_MS
+    : 0;
+  const hintRevealAt = bootT0 + lastCardLandMs + HINT_AFTER_LAST_MS;
+
   let angle = 0, vel = 0, targetVel = 0, isDragging = false, lastX = 0, hintGone = false, panelOpen = false;
+  let dragMoved = false;
+  let dragStartX = 0;
+  const DRAG_MOVE_PX = 6;
+
+  let seekActive = false;
+  let seekBase = 0;
+  let seekEntryAbsErr = 0.5;
+  let pendingSeekProject = null;
+  let primedBase = null;
+  let primedProject = null;
+  const FRONT_DEPTH = 0.86;
+  const SEEK_KP = 0.019;
+  const SEEK_MAX_VEL = 0.048;
+  const SEEK_SMOOTH = 0.13;
+  const SEEK_BELL_FLOOR = 0.2;
+  const SEEK_SETTLE_ERR = 0.078;
+  const SEEK_SETTLE_LERP = 0.22;
+  const SEEK_SETTLE_DAMP = 0.86;
+  const SEEK_SNAP_ERR = 0.0004;
+  const SEEK_SNAP_VEL = 0.0011;
 
   function clampVel(v) {
     return Math.max(-MAX_VEL, Math.min(MAX_VEL, v));
   }
+  function clampSeekVel(v) {
+    return Math.max(-SEEK_MAX_VEL, Math.min(SEEK_MAX_VEL, v));
+  }
+
+  function wrapAnglePi(x) {
+    const T = Math.PI * 2;
+    x = ((x + Math.PI) % T + T) % T - Math.PI;
+    return x;
+  }
+
+  /** Shortest delta to add to `angle` so this card's orbit angle (angle + base) is 0 mod 2π (front). */
+  function angleDeltaToFront(baseForCard) {
+    return wrapAnglePi(-(angle + baseForCard));
+  }
 
   const W    = () => scene.offsetWidth;
   const H    = () => scene.offsetHeight;
-  const R    = () => Math.min(W(), H()) * 0.36;
-  const TILT = 0.28;
+  const nOrbit = PROJECTS.length;
+  const CARD_WIDTH_PX = 256;
+  function R() {
+    const s = Math.min(W(), H());
+    if (nOrbit <= 1) return s * 0.34;
+    const minChord = CARD_WIDTH_PX * 1.14;
+    const sinHalf = Math.sin(Math.PI / nOrbit);
+    const fromCount = minChord / (2 * Math.max(sinHalf, 0.08));
+    const minR = s * 0.28;
+    const maxR = s * 0.48;
+    return Math.min(maxR, Math.max(minR, fromCount));
+  }
+  const TILT = 0.42;
+
+  /** Extra translateY so cards start above the viewport (not just above the orbit). */
+  function entryFallOffsetPx() {
+    const h = H(), cy = h * 0.5, rad = R();
+    return -(h + cy + rad * TILT + 200);
+  }
 
   window.addEventListener("resize", () => { render(); });
+
+  function foremostCardDepth() {
+    let m = -1;
+    cardEls.forEach(({ base }) => {
+      const d = (Math.cos(angle + base) + 1) / 2;
+      if (d > m) m = d;
+    });
+    return m;
+  }
 
   const cardEls = PROJECTS.map((p, i) => {
     const el = document.createElement("div");
@@ -273,28 +369,134 @@ function boot(PROJECTS) {
       <div class="card-stack">${p.stack.map(s => `<span class="stack-pill">${s}</span>`).join("")}</div>
       <span class="card-arrow">↗</span>
     `;
-    el.addEventListener("click", () => { if (Math.abs(vel) > 0.016) return; openPanel(p); });
+    el.addEventListener("click", () => {
+      if (!cardEls.every(c => c.entry.phase === "done")) return;
+      if (Math.abs(vel) > 0.016 && !seekActive) return;
+      const a = angle + base;
+      const depth = (Math.cos(a) + 1) / 2;
+      const maxD = foremostCardDepth();
+      const atFront = depth >= maxD - 0.004 && depth >= FRONT_DEPTH;
+
+      if (primedBase === base && atFront) {
+        openPanel(p);
+        primedBase = null;
+        primedProject = null;
+        return;
+      }
+
+      primedBase = null;
+      primedProject = null;
+
+      if (atFront) {
+        primedBase = base;
+        primedProject = p;
+        return;
+      }
+
+      seekBase = base;
+      pendingSeekProject = p;
+      seekActive = true;
+      targetVel = 0;
+      seekEntryAbsErr = Math.max(0.32, Math.abs(angleDeltaToFront(base)));
+    });
     scene.appendChild(el);
-    return { el, base: (i / PROJECTS.length) * Math.PI * 2 };
+    const base = (i / PROJECTS.length) * Math.PI * 2;
+    const startAt = bootT0 + CARD_FIRST_MS + i * CARD_STAGGER_MS;
+    return { el, base, entry: { phase: "wait", startAt, t0: 0 } };
   });
 
   function render() {
+    const now = performance.now();
     const cx = W() / 2, cy = H() / 2, r = R();
-    cardEls.forEach(({ el, base }) => {
+    const fallFrom = entryFallOffsetPx();
+
+    if (!hintGone) {
+      if (now < hintRevealAt) {
+        hint.style.transition = "none";
+        hint.style.opacity = "0";
+      } else {
+        const ht = Math.min(1, (now - hintRevealAt) / HINT_FADE_MS);
+        hint.style.transition = "none";
+        hint.style.opacity = String(easeOutCubic(ht));
+        if (ht >= 1) hint.style.transition = "opacity 0.7s ease";
+      }
+    }
+
+    let maxDepth = -1;
+    cardEls.forEach(({ base }) => {
+      const d = (Math.cos(angle + base) + 1) / 2;
+      if (d > maxDepth) maxDepth = d;
+    });
+
+    cardEls.forEach(({ el, base, entry }) => {
       const a     = angle + base;
       const depth = (Math.cos(a) + 1) / 2;
+      const orbitX = Math.sin(a) * r;
+      const orbitY = Math.cos(a) * r * TILT;
+      const scale = (0.68 + 0.32 * depth).toFixed(3);
+      const depthOpacity = 0.3 + 0.7 * depth;
+
+      let entryY = 0;
+      let opacityMul = 1;
+
+      if (entry.phase === "wait") {
+        if (now >= entry.startAt) {
+          entry.phase = "run";
+          entry.t0 = now;
+        } else {
+          entryY = fallFrom;
+          opacityMul = 0;
+        }
+      }
+      if (entry.phase === "run") {
+        const t = Math.min(1, (now - entry.t0) / CARD_ENTER_MS);
+        const easedDrop = enterEaseY(t);
+        entryY = fallFrom * (1 - easedDrop);
+        opacityMul = easeOutCubic(t);
+        if (t >= 1) entry.phase = "done";
+      }
+
       el.style.left      = cx + "px";
       el.style.top       = cy + "px";
-      el.style.transform = `translate(calc(-50% + ${Math.sin(a) * r}px), calc(-50% + ${Math.cos(a) * r * TILT}px)) scale(${(0.68 + 0.32 * depth).toFixed(3)})`;
-      el.style.opacity   = (0.3 + 0.7 * depth).toFixed(3);
+      el.style.transform = `translate(calc(-50% + ${orbitX}px), calc(-50% + ${orbitY + entryY}px)) scale(${scale})`;
+      el.style.opacity   = (depthOpacity * opacityMul).toFixed(3);
       el.style.zIndex    = Math.round(depth * 100);
+      const isForemost = depth >= maxDepth - 0.004;
+      const showPrimed = primedBase === base && isForemost && depth >= FRONT_DEPTH && entry.phase === "done";
+      el.classList.toggle("card--primed", showPrimed);
     });
   }
 
   (function loop() {
-    if (isDragging) {
+    if (isDragging && dragMoved) {
       vel += (targetVel - vel) * DRAG_ACCEL;
       vel = clampVel(vel);
+    } else if (seekActive) {
+      const err = angleDeltaToFront(seekBase);
+      if (Math.abs(err) < SEEK_SNAP_ERR && Math.abs(vel) < SEEK_SNAP_VEL) {
+        angle -= angle + seekBase;
+        vel = 0;
+        targetVel = 0;
+        seekActive = false;
+        if (pendingSeekProject) {
+          primedBase = seekBase;
+          primedProject = pendingSeekProject;
+          pendingSeekProject = null;
+        }
+      } else if (Math.abs(err) < SEEK_SETTLE_ERR) {
+        vel *= SEEK_SETTLE_DAMP;
+        targetVel *= SEEK_SETTLE_DAMP;
+        angle += err * SEEK_SETTLE_LERP;
+      } else {
+        const span = Math.max(seekEntryAbsErr, 0.12);
+        const t = 1 - Math.min(1, Math.abs(err) / span);
+        const bell = 4 * t * (1 - t);
+        const speedMul = SEEK_BELL_FLOOR + (1 - SEEK_BELL_FLOOR) * bell;
+        const gain = SEEK_KP * speedMul;
+        targetVel = clampSeekVel(err * gain);
+        vel += (targetVel - vel) * SEEK_SMOOTH;
+        vel = clampSeekVel(vel);
+      }
     } else {
       vel *= FRICTION;
     }
@@ -304,31 +506,75 @@ function boot(PROJECTS) {
   })();
 
   scene.addEventListener("mousedown", e => {
-    if (e.target.closest(".panel,.panel-close,.back-link")) return;
-    isDragging = true; lastX = e.clientX; targetVel = 0; fadeHint();
+    if (e.target.closest(".panel,.panel-close")) return;
+    const onCard = !!e.target.closest(".card");
+    if (!onCard) {
+      seekActive = false;
+      pendingSeekProject = null;
+      primedBase = null;
+      primedProject = null;
+    }
+    isDragging = true;
+    dragMoved = false;
+    dragStartX = e.clientX;
+    lastX = e.clientX;
+    targetVel = 0;
+    fadeHint();
   });
   window.addEventListener("mousemove", e => {
     if (!isDragging) return;
+    if (!dragMoved && Math.abs(e.clientX - dragStartX) > DRAG_MOVE_PX) {
+      dragMoved = true;
+      seekActive = false;
+      pendingSeekProject = null;
+      primedBase = null;
+      primedProject = null;
+    }
+    if (!dragMoved) return;
     const dx = e.clientX - lastX;
     lastX = e.clientX;
     targetVel = clampVel(dx * DRAG_SCALE);
   });
-  window.addEventListener("mouseup", () => { isDragging = false; });
+  window.addEventListener("mouseup", () => { isDragging = false; dragMoved = false; });
 
   scene.addEventListener("touchstart", e => {
-    if (e.target.closest(".panel,.panel-close,.back-link")) return;
-    isDragging = true; lastX = e.touches[0].clientX; targetVel = 0; fadeHint();
+    if (e.target.closest(".panel,.panel-close")) return;
+    const onCard = !!e.target.closest(".card");
+    if (!onCard) {
+      seekActive = false;
+      pendingSeekProject = null;
+      primedBase = null;
+      primedProject = null;
+    }
+    isDragging = true;
+    dragMoved = false;
+    dragStartX = e.touches[0].clientX;
+    lastX = e.touches[0].clientX;
+    targetVel = 0;
+    fadeHint();
   }, { passive: true });
   window.addEventListener("touchmove", e => {
     if (!isDragging) return;
-    const dx = e.touches[0].clientX - lastX;
-    lastX = e.touches[0].clientX;
+    const x = e.touches[0].clientX;
+    if (!dragMoved && Math.abs(x - dragStartX) > DRAG_MOVE_PX) {
+      dragMoved = true;
+      seekActive = false;
+      pendingSeekProject = null;
+      primedBase = null;
+      primedProject = null;
+    }
+    if (!dragMoved) return;
+    const dx = x - lastX;
+    lastX = x;
     targetVel = clampVel(dx * DRAG_SCALE);
   }, { passive: true });
-  window.addEventListener("touchend", () => { isDragging = false; });
+  window.addEventListener("touchend", () => { isDragging = false; dragMoved = false; });
 
   function fadeHint() {
-    if (hintGone) return; hintGone = true; hint.style.opacity = "0";
+    if (hintGone) return;
+    hintGone = true;
+    hint.style.transition = "opacity 0.7s ease";
+    hint.style.opacity = "0";
   }
 
   function openPanel(p) {
@@ -359,6 +605,11 @@ function boot(PROJECTS) {
 
   function closePanel() {
     panel.classList.remove("open"); scrim.classList.remove("open"); panelOpen = false;
+    seekActive = false;
+    pendingSeekProject = null;
+    primedBase = null;
+    primedProject = null;
+    targetVel = 0;
   }
   document.getElementById("panel-close").addEventListener("click", closePanel);
   scrim.addEventListener("click", e => { if (!e.target.closest(".panel")) closePanel(); });
