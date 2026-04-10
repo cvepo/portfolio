@@ -1,109 +1,57 @@
 [
   {
-    "tag": "hack4impact",
-    "tagClass": "t-green",
-    "title": "CHEM Endowment Manager",
-    "desc": "Nonprofit tool to track and distribute financial endowments — replaced a brittle spreadsheet workflow.",
-    "body": "Built for a nonprofit client with a team of 6 at Hack4Impact Cornell. The client was managing endowment distributions entirely in spreadsheets, making auditing painful and donor reporting a manual slog. We replaced it with a structured web app with a proper audit trail.",
-    "highlight": {
-      "label": "what made it hard",
-      "text": "Modeling pro-rated fund distributions across fiscal quarters. We went through three schema designs before the reports came out clean — the data model matters more than the UI when it's a finance tool."
-    },
-    "meta": [
-      { "label": "timeline", "value": "Aug – Dec 2024" },
-      { "label": "role",     "value": "full-stack dev" },
-      { "label": "team",     "value": "6 engineers" },
-      { "label": "org",      "value": "Hack4Impact" }
-    ],
-    "stack": ["react", "node.js", "postgresql", "react-pdf"],
-    "links": [
-      { "label": "github ↗",    "href": "https://github.com/cvepo" },
-      { "label": "live site ↗", "href": "#" }
-    ]
-  },
-  {
     "tag": "cornell appdev",
     "tagClass": "t-purple",
     "title": "Uplift",
-    "desc": "Campus fitness app connecting Cornell students to workouts, classes, and gym resources.",
-    "body": "Associate PM on a cross-functional team at Cornell AppDev. Led sprint planning, ran stakeholder syncs with Cornell Recreation, and owned the product roadmap for two release cycles. Focused on the onboarding flow and class discovery UX — both had rough drop-off we systematically addressed.",
-    "highlight": {
-      "label": "proudest moment",
-      "text": "Convincing Cornell Recreation to share their internal class scheduling data with us. That unlock made the whole class discovery feature possible and was the thing users asked about most in feedback."
-    },
-    "meta": [
-      { "label": "timeline", "value": "Spring 2024" },
-      { "label": "role",     "value": "associate PM" },
-      { "label": "platform", "value": "iOS + Android" },
-      { "label": "org",      "value": "Cornell AppDev" }
-    ],
-    "stack": ["swift", "react native", "figma", "jira"],
-    "links": [
-      { "label": "case study ↗", "href": "#" },
-      { "label": "app store ↗",  "href": "#" }
-    ]
+    "desc": "",
+    "body": "",
+    "highlight": { "label": "", "text": "" },
+    "meta": [],
+    "stack": [],
+    "links": []
   },
   {
-    "tag": "timing",
-    "tagClass": "t-amber",
-    "title": "SWE Internship",
-    "desc": "Full-stack work on a time tracking app used by freelancers and agencies worldwide.",
-    "body": "Worked across the billing integration and reporting dashboard. Built a flexible invoice template system, improved performance of time log queries by restructuring slow Postgres joins, and shipped features live for thousands of active users.",
-    "highlight": {
-      "label": "key win",
-      "text": "Restructured a query doing a full table scan on every dashboard load. Brought it from ~2s to under 80ms by rethinking the join order and adding a covering index."
-    },
-    "meta": [
-      { "label": "timeline",  "value": "Summer 2024" },
-      { "label": "role",      "value": "SWE intern" },
-      { "label": "stack",     "value": "Vue + Rails" },
-      { "label": "location",  "value": "remote" }
-    ],
-    "stack": ["vue.js", "ruby on rails", "postgresql", "stripe"],
-    "links": [
-      { "label": "timing.is ↗", "href": "https://timing.is" }
-    ]
-  },
-  {
-    "tag": "gdg cornell",
-    "tagClass": "t-blue",
-    "title": "Chapter Founder",
-    "desc": "Founded the Google Developer Group chapter at Cornell from zero — events, workshops, a builder community.",
-    "body": "Grew the chapter from nothing to 120+ members in one academic year. Organized 8 workshops ranging from Firebase to ML Kit, brought in 3 Google engineers as guest speakers, and coordinated with GDG Global for official recognition and resources.",
-    "highlight": {
-      "label": "biggest lesson",
-      "text": "Building a community is a product problem. You need to know who you're building for before you run your first event — otherwise you optimize for attendance numbers instead of retention."
-    },
-    "meta": [
-      { "label": "timeline", "value": "2023 – present" },
-      { "label": "role",     "value": "chapter founder" },
-      { "label": "members",  "value": "120+" },
-      { "label": "events",   "value": "8 workshops" }
-    ],
-    "stack": ["community", "google cloud", "firebase"],
-    "links": [
-      { "label": "chapter page ↗", "href": "#" }
-    ]
+    "tag": "hack4impact",
+    "tagClass": "t-green",
+    "title": "CHEM",
+    "desc": "",
+    "body": "",
+    "highlight": { "label": "", "text": "" },
+    "meta": [],
+    "stack": [],
+    "links": []
   },
   {
     "tag": "personal",
     "tagClass": "t-teal",
-    "title": "This Portfolio",
-    "desc": "Minimal, personality-forward. Vanilla HTML/CSS/JS — no frameworks, no fuss.",
-    "body": "One-page architecture with a fixed sidenav, dark/light toggle, and scroll-reveal animations via Intersection Observer. Deployed on Vercel with Cloudflare DNS. This projects page is a 3D orbit carousel, because static grids are boring.",
-    "highlight": {
-      "label": "gotcha",
-      "text": "Cloudflare email obfuscation silently rewrites inline JS on the live site. Fixed by constructing mailto links programmatically instead."
-    },
-    "meta": [
-      { "label": "timeline", "value": "ongoing" },
-      { "label": "stack",    "value": "vanilla" },
-      { "label": "hosting",  "value": "vercel" },
-      { "label": "dns",      "value": "cloudflare" }
-    ],
-    "stack": ["html", "css", "javascript", "vercel"],
-    "links": [
-      { "label": "github ↗", "href": "https://github.com/cvepo" }
-    ]
+    "title": "Portfolio",
+    "desc": "",
+    "body": "",
+    "highlight": { "label": "", "text": "" },
+    "meta": [],
+    "stack": [],
+    "links": []
+  },
+  {
+    "tag": "timing",
+    "tagClass": "t-amber",
+    "title": "Timing",
+    "desc": "",
+    "body": "",
+    "highlight": { "label": "", "text": "" },
+    "meta": [],
+    "stack": [],
+    "links": []
+  },
+  {
+    "tag": "personal",
+    "tagClass": "t-blue",
+    "title": "Sustainify",
+    "desc": "",
+    "body": "",
+    "highlight": { "label": "", "text": "" },
+    "meta": [],
+    "stack": [],
+    "links": []
   }
 ]

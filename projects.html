@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>projects — enzo hiu</title>
+<title>projects 🚧 — enzo hiu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -169,7 +169,7 @@ html, body {
         <li><a href="index.html#contact">contact</a></li>
       </ul>
     </li>
-    <li class="nav-projects-item"><a href="projects.html" class="active">projects</a></li>
+    <li class="nav-projects-item"><a href="projects.html" class="active">projects&nbsp;🚧</a></li>
     <li class="nav-wip-item"><a href="wip.html">wip</a></li>
   </ul>
   <div class="nav-bottom">
@@ -222,14 +222,11 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
 });
 
-// load projects.json and boot (pad to 10 cards for layout preview — cycle real entries)
 fetch("projects.json")
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
   .then((data) => {
     if (!data.length) throw new Error("no projects");
-    const n = 10;
-    const padded = Array.from({ length: n }, (_, i) => data[i % data.length]);
-    boot(padded);
+    boot(data);
   })
   .catch(err => {
     console.error("projects.json load error:", err);
