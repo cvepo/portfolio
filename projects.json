@@ -1,57 +1,134 @@
 [
   {
+    "slug": "uplift",
     "tag": "cornell appdev",
     "tagClass": "t-purple",
     "title": "Uplift",
-    "desc": "",
-    "body": "",
-    "highlight": { "label": "", "text": "" },
-    "meta": [],
-    "stack": [],
-    "links": []
+    "desc": "Campus fitness app for Cornell's gym facilities.",
+    "body": "Uplift gives Cornell students a single place to check gym hours, live equipment capacity, and fitness class schedules across all campus facilities. The app serves thousands of active users each semester and is maintained by a cross-functional team of engineers and PMs at Cornell AppDev. I joined as an Associate PM, working across the iOS and backend surfaces to prioritize and ship iterative improvements.",
+    "highlight": {
+      "label": "Impact",
+      "text": "Thousands of active Cornell students rely on Uplift each semester to plan their workouts — replace this with your real metric."
+    },
+    "meta": [
+      { "label": "Role", "value": "Associate PM" },
+      { "label": "Team", "value": "~15 engineers + PMs" },
+      { "label": "Timeline", "value": "2025 – present" },
+      { "label": "Status", "value": "Active" }
+    ],
+    "challenges": [
+      "Aggregating real-time occupancy and schedule data from disparate, unreliable gym data sources",
+      "Coordinating feature work across iOS and backend teams on a semester-based release cycle",
+      "Balancing new feature requests against stability and existing user expectations"
+    ],
+    "stack": ["SwiftUI", "Flask", "GraphQL", "PostgreSQL", "Xcode"],
+    "links": [
+      { "label": "GitHub · iOS", "href": "https://github.com/cuappdev/uplift-ios-swiftui" },
+      { "label": "GitHub · Backend", "href": "https://github.com/cuappdev/uplift-backend" }
+    ]
   },
   {
+    "slug": "chem",
     "tag": "hack4impact",
     "tagClass": "t-green",
     "title": "CHEM",
-    "desc": "",
-    "body": "",
-    "highlight": { "label": "", "text": "" },
-    "meta": [],
-    "stack": [],
-    "links": []
+    "desc": "Endowment management platform for a Cornell Hack4Impact nonprofit client.",
+    "body": "CHEM is a fullstack web application built for a nonprofit client through Cornell Hack4Impact. It streamlines how the organization tracks endowment funds, models allocation scenarios, and maintains compliance reporting. The system replaces a manual, spreadsheet-based workflow with a structured dashboard that makes fund performance and regulatory requirements visible at a glance.",
+    "highlight": {
+      "label": "Client impact",
+      "text": "Replaced a manual spreadsheet workflow — add the specific outcome or time saved here."
+    },
+    "meta": [
+      { "label": "Role", "value": "Full-Stack Developer" },
+      { "label": "Team", "value": "~6 developers" },
+      { "label": "Timeline", "value": "2025 – present" },
+      { "label": "Status", "value": "Active" }
+    ],
+    "challenges": [
+      "Modeling complex fund allocation logic that matched the client's existing mental model",
+      "Designing a data schema flexible enough to accommodate evolving compliance requirements",
+      "Shipping a production-ready product on a fixed semester timeline with a rotating team"
+    ],
+    "stack": ["Next.js", "React", "Express.js", "Prisma", "TypeScript"],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/cornellh4i/CHEM" }
+    ]
   },
   {
+    "slug": "portfolio",
     "tag": "personal",
     "tagClass": "t-teal",
     "title": "Portfolio",
-    "desc": "",
-    "body": "",
-    "highlight": { "label": "", "text": "" },
-    "meta": [],
-    "stack": [],
-    "links": []
+    "desc": "You're looking at it.",
+    "body": "A hand-built static portfolio site with no frameworks — just HTML, CSS, and vanilla JS. The goal was full creative control over every animation, interaction, and layout decision. Features include a 3D carousel on the projects page, a scroll-based reveal system, a filterable icon grid on the toolbox page, and a theme toggle with localStorage persistence.",
+    "highlight": {
+      "label": "Design goal",
+      "text": "Zero dependencies, zero build step — just files served directly. Fast, auditable, and fully owned."
+    },
+    "meta": [
+      { "label": "Role", "value": "Solo" },
+      { "label": "Team", "value": "Just me" },
+      { "label": "Timeline", "value": "2025 – present" },
+      { "label": "Status", "value": "Ongoing" }
+    ],
+    "challenges": [
+      "Building a smooth physics-based 3D carousel with drag inertia using only the Canvas/rAF loop — no libraries",
+      "Designing a consistent visual system (type scale, color tokens, spacing) from scratch",
+      "Getting smooth reveal animations without layout thrash across varying scroll speeds"
+    ],
+    "stack": ["HTML", "CSS", "JavaScript"],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/cvepo/portfolio" }
+    ]
   },
   {
+    "slug": "timing",
     "tag": "timing",
     "tagClass": "t-amber",
     "title": "Timing",
-    "desc": "",
-    "body": "",
-    "highlight": { "label": "", "text": "" },
-    "meta": [],
-    "stack": [],
-    "links": []
+    "desc": "Work done during my software engineering internship at Timing.",
+    "body": "Replace this with a description of what you built at Timing. What was the product, what problem does it solve, and what did your specific work contribute to it?",
+    "highlight": {
+      "label": "Highlight",
+      "text": "Add a standout outcome, metric, or technical decision from the internship here."
+    },
+    "meta": [
+      { "label": "Role", "value": "SWE Intern" },
+      { "label": "Team", "value": "Add team size" },
+      { "label": "Timeline", "value": "Spring 2026" },
+      { "label": "Status", "value": "Shipped" }
+    ],
+    "challenges": [
+      "Add the key technical or product challenges you faced here",
+      "Add another challenge"
+    ],
+    "stack": ["Add", "your", "stack"],
+    "links": [
+      { "label": "Live Site", "href": "https://gettiming.com/" }
+    ]
   },
   {
+    "slug": "sustainify",
     "tag": "personal",
     "tagClass": "t-blue",
     "title": "Sustainify",
-    "desc": "",
-    "body": "",
-    "highlight": { "label": "", "text": "" },
-    "meta": [],
-    "stack": [],
+    "desc": "Replace with your one-sentence tagline for Sustainify.",
+    "body": "Replace this with a description of what Sustainify is, what problem it solves, and what inspired it.",
+    "highlight": {
+      "label": "Highlight",
+      "text": "Add a standout stat, outcome, or insight from building Sustainify."
+    },
+    "meta": [
+      { "label": "Role", "value": "Solo" },
+      { "label": "Team", "value": "Just me" },
+      { "label": "Timeline", "value": "Add timeline" },
+      { "label": "Status", "value": "Add status" }
+    ],
+    "challenges": [
+      "Add the key challenges you faced building Sustainify",
+      "Add another challenge"
+    ],
+    "stack": ["Add", "your", "stack"],
     "links": []
   }
 ]
