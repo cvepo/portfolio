@@ -110,9 +110,6 @@ section{padding-top:88px}
 .tool-icon{width:18px;height:18px}
 .lang-icon{width:13px;height:13px;background-color:var(--icon-muted)}
 .lang-pill:hover .lang-icon{background-color:var(--text-2)}
-.tool-icon-img,.lang-icon-img{flex-shrink:0;display:block;object-fit:contain}
-.tool-icon-img{width:18px;height:18px}
-.lang-icon-img{width:13px;height:13px}
 .tool-icon--cursor{-webkit-mask-image:url('https://cdn.simpleicons.org/cursor');mask-image:url('https://cdn.simpleicons.org/cursor')}
 .tool-icon--anthropic{-webkit-mask-image:url('https://cdn.simpleicons.org/anthropic');mask-image:url('https://cdn.simpleicons.org/anthropic')}
 .tool-icon--git{-webkit-mask-image:url('https://cdn.simpleicons.org/git');mask-image:url('https://cdn.simpleicons.org/git')}
@@ -231,7 +228,7 @@ footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3
 
         <div class="tool-card reveal reveal-delay-2">
           <div class="tool-card-top">
-            <img class="tool-icon-img" src="https://cdn.simpleicons.org/visualstudiocode/007ACC" width="18" height="18" alt="" loading="lazy" decoding="async" />
+            <span class="tool-icon" style="-webkit-mask-image:url('https://cdn.simpleicons.org/visualstudiocode');mask-image:url('https://cdn.simpleicons.org/visualstudiocode')" aria-hidden="true"></span>
             <span class="tool-name">VS Code</span>
           </div>
         </div>
@@ -294,9 +291,9 @@ footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3
         <span class="lang-pill"><span class="lang-icon lang-icon--javascript" aria-hidden="true"></span>JavaScript</span>
         <span class="lang-pill"><span class="lang-icon lang-icon--typescript" aria-hidden="true"></span>TypeScript</span>
         <span class="lang-pill"><span class="lang-icon lang-icon--python" aria-hidden="true"></span>Python</span>
-        <span class="lang-pill"><img class="lang-icon-img" src="https://cdn.simpleicons.org/java/ED8B00" width="13" height="13" alt="" loading="lazy" decoding="async" />Java</span>
+        <span class="lang-pill"><span class="lang-icon" style="-webkit-mask-image:url('https://cdn.simpleicons.org/openjdk');mask-image:url('https://cdn.simpleicons.org/openjdk')" aria-hidden="true"></span>Java</span>
         <span class="lang-pill"><span class="lang-icon lang-icon--html" aria-hidden="true"></span>HTML</span>
-        <span class="lang-pill"><img class="lang-icon-img" src="https://cdn.simpleicons.org/css3/1572B6" width="13" height="13" alt="" loading="lazy" decoding="async" />CSS</span>
+        <span class="lang-pill"><span class="lang-icon" style="-webkit-mask-image:url('https://cdn.simpleicons.org/css3');mask-image:url('https://cdn.simpleicons.org/css3')" aria-hidden="true"></span>CSS</span>
         <span class="lang-pill"><span class="lang-icon lang-icon--swift" aria-hidden="true"></span>Swift</span>
       </div>
     </section>
