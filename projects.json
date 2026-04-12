@@ -85,34 +85,6 @@
   },
 
   {
-    "slug": "timing",
-    "tag": "timing",
-    "tagClass": "t-green",
-    "title": "Timing",
-    "desc": "Work completed during my software engineering internship at Timing.",
-    "body": "Timing is a relationship management app. As a software engineering intern, I owned development of an LLM-powered relationship assistant that models user interaction history to generate contextual recommendations and proactive notifications. I also redesigned in-app contact onboarding flows and architected the cross-platform monorepo that underpins the product.",
-    "highlight": {
-      "label": "Highlight",
-      "text": "Redesigned contact onboarding, reducing new contact creation time by 75% (60s → 15s)."
-    },
-    "meta": [
-      { "label": "Role", "value": "Software Engineering Intern" },
-      { "label": "Team", "value": "Remote" },
-      { "label": "Timeline", "value": "Dec 2025 – Mar 2026" },
-      { "label": "Status", "value": "Shipped" }
-    ],
-    "challenges": [
-      "Engineering prompt pipelines and feedback loops to improve LLM personalization accuracy over time",
-      "Architecting a scalable pnpm TypeScript monorepo (Next.js + Expo) with shared API layers for cross-platform feature parity",
-      "Implementing secure Supabase OAuth authentication with stable iOS simulator and dev-client builds"
-    ],
-    "stack": ["Next.js", "Expo", "TypeScript", "Supabase", "pnpm"],
-    "links": [
-      { "label": "Live Site", "href": "https://gettiming.com/" }
-    ]
-  },
-
-  {
     "slug": "sustainify",
     "tag": "personal",
     "tagClass": "t-blue",
