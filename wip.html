@@ -124,10 +124,6 @@ body {
 .nav-links > .nav-uses-item { animation-delay: 0.52s; }
 .nav-links > .nav-wip-item { animation-delay: 0.6s; }
 
-.nav-links .nav-wip-item {
-  margin-top: auto;
-}
-
 .nav-sub li {
   opacity: 0;
   animation: fadeRight 0.4s ease forwards;
@@ -605,7 +601,6 @@ footer {
     margin-top: 2px;
   }
   .nav-links a::before { display: none; }
-  .nav-wip-item { margin-top: 0; }
   .nav-bottom { margin-top: 0; padding-top: 0; }
   main { padding: 0 24px 80px; }
   .about-grid { grid-template-columns: 1fr; }
@@ -646,7 +641,7 @@ footer {
     </li>
     <li class="nav-projects-item"><a href="projects.html">projects&nbsp;🚧</a></li>
     <li class="nav-uses-item"><a href="uses.html">uses</a></li>
-    <!-- Nav order: keep wip last in this ul. Add new items above wip unless a page should sit below wip. -->
+    <!-- Nav order: keep wip as the last list item. Add new links above wip unless one should go after it. -->
     <li class="nav-wip-item"><a href="wip.html" class="active">wip</a></li>
   </ul>
   <div class="nav-bottom">
