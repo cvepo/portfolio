@@ -1,15 +1,15 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/Portfolio/main.html" },
-    { "source": "/main", "destination": "/Portfolio/main.html" },
-    { "source": "/toolbox", "destination": "/Portfolio/toolbox.html" },
-    { "source": "/projects", "destination": "/Portfolio/projects.html" },
-    { "source": "/wip", "destination": "/Portfolio/wip.html" }
-  ],
   "redirects": [
-    { "source": "/index.html", "destination": "/main", "permanent": true },
+    { "source": "/Portfolio/main.html", "destination": "/", "permanent": true },
+    { "source": "/Portfolio/main", "destination": "/", "permanent": true },
+    { "source": "/Portfolio/toolbox.html", "destination": "/toolbox", "permanent": true },
+    { "source": "/Portfolio/toolbox", "destination": "/toolbox", "permanent": true },
+    { "source": "/Portfolio/projects.html", "destination": "/projects", "permanent": true },
+    { "source": "/Portfolio/projects", "destination": "/projects", "permanent": true },
+    { "source": "/Portfolio/wip.html", "destination": "/wip", "permanent": true },
+    { "source": "/Portfolio/wip", "destination": "/wip", "permanent": true },
     { "source": "/toolbox.html", "destination": "/toolbox", "permanent": true },
     { "source": "/projects.html", "destination": "/projects", "permanent": true },
     { "source": "/wip.html", "destination": "/wip", "permanent": true }

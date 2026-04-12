@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>WIP · Enzo Hiu</title>
+<title>Enzo Hiu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -28,6 +28,7 @@
   --tag-purple-bg: #1a1530; --tag-purple: #a48ef5;
   --tag-pink-bg: #281020; --tag-pink: #f07ab8;
   --tag-teal-bg: #0a2022; --tag-teal: #4dcbb8;
+  --tag-red-bg: #301418; --tag-red: #e87070;
   --heading-glow: rgba(238, 237, 232, 0.55);
   --heading-glow-soft: rgba(238, 237, 232, 0.18);
 }
@@ -48,6 +49,7 @@
   --tag-purple-bg: #f0eefb; --tag-purple: #5a42b5;
   --tag-pink-bg: #fceef5; --tag-pink: #b0387a;
   --tag-teal-bg: #e4f5f2; --tag-teal: #1e7a6a;
+  --tag-red-bg: #fce8e8; --tag-red: #b83232;
   --heading-glow: rgba(26, 26, 24, 0.35);
   --heading-glow-soft: rgba(26, 26, 24, 0.12);
 }
@@ -341,8 +343,6 @@ section { padding-top: 88px; }
 .reveal-delay-4 { transition-delay: 0.32s; }
 .reveal-delay-5 { transition-delay: 0.4s; }
 .reveal-delay-6 { transition-delay: 0.48s; }
-.reveal-delay-7 { transition-delay: 0.56s; }
-.reveal-delay-8 { transition-delay: 0.64s; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
@@ -352,7 +352,6 @@ section { padding-top: 88px; }
     filter: none;
     color: var(--text-2);
   }
-  .wip-item-details { transition: none; }
 }
 
 /* ABOUT */
@@ -411,6 +410,138 @@ section { padding-top: 88px; }
 .offline-item:hover { transform: translateY(-1px); }
 .offline-item .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
 
+/* PROJECTS */
+.project-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 48px 22px 24px;
+  margin-bottom: 10px;
+  background: var(--bg2);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  cursor: default;
+}
+.project-card:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+.project-card-external {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.project-card-external:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+.project-repo-wrap {
+  position: absolute;
+  top: 16px;
+  right: 14px;
+  outline: none;
+}
+.project-repo-wrap:focus-visible {
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--border-strong);
+}
+.project-repo-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.project-repo-wrap:hover .project-repo-trigger,
+.project-repo-wrap:focus-within .project-repo-trigger {
+  color: var(--text);
+  background: var(--surface2);
+}
+.project-repo-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 11rem;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 20;
+  pointer-events: none;
+}
+[data-theme="dark"] .project-repo-dropdown {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.project-repo-wrap:hover .project-repo-dropdown,
+.project-repo-wrap:focus-within .project-repo-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.project-repo-dropdown a {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: -0.01em;
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: color 0.12s, background 0.12s;
+}
+.project-repo-dropdown a:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+.project-name {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.project-desc { font-size: 14px; color: var(--text-2); line-height: 1.65; margin-bottom: 16px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.01em;
+  transition: transform 0.15s, border-color 0.15s, color 0.15s;
+}
+.tag:hover { transform: scale(1.05); }
+.project-card .tag {
+  background: var(--surface);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.project-card .tag:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
 /* EXPERIENCE */
 .exp-item {
   display: grid;
@@ -462,104 +593,6 @@ footer {
   justify-content: space-between;
 }
 
-/* WIP */
-.wip-hero-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 58px;
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.25s ease forwards;
-}
-.wip-hero-title em { font-style: italic; color: var(--text-2); }
-.wip-list { display: flex; flex-direction: column; gap: 10px; }
-.wip-item {
-  position: relative;
-  z-index: 0;
-  padding: 16px 18px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg2);
-  transition: border-color 0.2s, background 0.2s, transform 0.2s;
-}
-.wip-item:hover,
-.wip-item:focus-within {
-  z-index: 5;
-  border-color: var(--border-strong);
-  background: var(--surface);
-  transform: translateY(-2px);
-}
-.wip-item--expandable { outline: none; }
-.wip-item--expandable:focus-visible {
-  box-shadow: 0 0 0 2px var(--border-strong);
-}
-.wip-item-main {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-.wip-item-title {
-  font-size: 14px;
-  color: var(--text-2);
-  line-height: 1.65;
-  flex: 1;
-  min-width: 0;
-  margin: 0;
-}
-.wip-item-details {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 6px);
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  font-size: 13px;
-  color: var(--text-2);
-  line-height: 1.6;
-  z-index: 30;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-  pointer-events: none;
-}
-[data-theme="dark"] .wip-item-details {
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
-}
-.wip-item--expandable:hover .wip-item-details,
-.wip-item--expandable:focus-within .wip-item-details {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.wip-status {
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  letter-spacing: 0.02em;
-  flex-shrink: 0;
-  margin-top: 2px;
-  text-transform: lowercase;
-}
-.wip-status--idea { background: var(--tag-amber-bg); color: var(--tag-amber); }
-.wip-status--progress { background: var(--tag-blue-bg); color: var(--tag-blue); }
-.wip-status--done { background: var(--tag-green-bg); color: var(--tag-green); }
-.wip-back {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  transition: color 0.15s, border-color 0.15s;
-}
-.wip-back:hover { color: var(--text); border-bottom-color: var(--text-3); }
-
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -605,44 +638,29 @@ footer {
   main { padding: 0 24px 80px; }
   .about-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 40px; }
-  .wip-hero-title { font-size: 40px; }
-  .wip-item--expandable .wip-item-details {
-    position: static;
-    margin-top: 12px;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    pointer-events: auto;
-    box-shadow: none;
-    background: var(--bg2);
-  }
-  .wip-item--expandable:hover,
-  .wip-item--expandable:focus-within {
-    transform: none;
-  }
 }
 </style>
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
-<body class="page-wip">
+<body class="page-main">
 
 <div class="layout">
 <nav class="sidenav">
-  <a href="/main#top" class="nav-name">enzo hiu</a>
+  <a href="#top" class="nav-name">enzo hiu</a>
   <ul class="nav-links">
     <li class="nav-block">
       <a href="https://vepo.studio/" class="nav-main-link">main</a>
       <ul class="nav-sub">
-        <li><a href="/main#about">about</a></li>
-        <li><a href="/main#projects">projects</a></li>
-        <li><a href="/main#experience">experience</a></li>
-        <li><a href="/main#contact">contact</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#projects">featured</a></li>
+        <li><a href="#experience">experience</a></li>
+        <li><a href="#contact">contact</a></li>
       </ul>
     </li>
     <li class="nav-projects-item"><a href="/projects">projects&nbsp;🚧</a></li>
     <li class="nav-toolbox-item"><a href="/toolbox">toolbox</a></li>
     <!-- Nav order: keep wip as the last list item. Add new links above wip unless one should go after it. -->
-    <li class="nav-wip-item"><a href="/wip" class="active">wip</a></li>
+    <li class="nav-wip-item"><a href="/wip">wip</a></li>
   </ul>
   <div class="nav-bottom">
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
@@ -654,99 +672,160 @@ footer {
 
 <main>
   <section class="hero" id="top">
-    <h1 class="wip-hero-title"><em>wip.</em></h1>
-    <p class="hero-sub">things i'm thinking about</p>
+    <p class="hero-eyebrow">Cornell University · CS '28</p>
+    <h1>Enzo<br><em>Hiu.</em></h1>
+    <p class="hero-sub">Hi I like to build cool things.</p>
   </section>
 
   <hr class="divider" />
 
-  <section id="on-site">
-    <p class="section-label reveal">On the site</p>
-    <!-- List order: done → in progress → idea -->
-    <div class="wip-list">
-      <div class="wip-item reveal reveal-delay-1">
-        <div class="wip-item-main">
-          <p class="wip-item-title">This WIP scratchpad (you are here).</p>
-          <span class="wip-status wip-status--done">done</span>
-        </div>
+  <section id="about">
+    <p class="section-label reveal">About</p>
+    <p class="about-bio reveal reveal-delay-1">CS student at Cornell building full-stack products at the intersection of software and community. Developer with Hack4Impact and Associate Product Manager with Cornell AppDev.</p>
+    <div class="about-grid">
+      <div class="about-card reveal reveal-delay-1">
+        <p class="about-card-label">Currently</p>
+        <p>Developer · Hack4Impact @ Cornell<br>Associate Product Manager · Cornell AppDev</p>
       </div>
-      <div class="wip-item reveal reveal-delay-2">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Toolbox page</p>
-          <span class="wip-status wip-status--done">done</span>
-        </div>
+      <div class="about-card reveal reveal-delay-2">
+        <p class="about-card-label">Location</p>
+        <p>Ithaca, NY<br>Cornell University</p>
       </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-3" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Blurb / blog board</p>
-          <span class="wip-status wip-status--idea">idea</span>
-        </div>
-        <div class="wip-item-details">A minimal stream of short thoughts, links, and updates without the overhead of a full blog.</div>
-      </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-4" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Detailed about page</p>
-          <span class="wip-status wip-status--idea">idea</span>
-        </div>
-        <div class="wip-item-details">More about who I am beyond the bio: background, interests, what I care about building.</div>
-      </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-5" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Photo gallery</p>
-          <span class="wip-status wip-status--idea">idea</span>
-        </div>
-        <div class="wip-item-details">A simple grid of photos: life, travel, random moments.</div>
-      </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-6" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Experience deep-dives</p>
-          <span class="wip-status wip-status--idea">idea</span>
-        </div>
-        <div class="wip-item-details">Proper write-ups for each role with context, what I worked on, and what I learned.</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p class="offline-label">Offline</p>
+      <div class="offline-list">
+        <span class="offline-item" style="background:var(--tag-amber-bg);color:var(--tag-amber);">
+          <span class="dot" style="background:var(--tag-amber);"></span>Cornell Asian Pacific Union · Director of Internal Affairs
+        </span>
+        <span class="offline-item" style="background:var(--tag-green-bg);color:var(--tag-green);">
+          <span class="dot" style="background:var(--tag-green);"></span>Google Developer Group · Chapter Founder
+        </span>
+        <span class="offline-item" style="background:var(--tag-red-bg);color:var(--tag-red);">
+          <span class="dot" style="background:var(--tag-red);"></span>Cornell Chinese Student Association
+        </span>
+        <span class="offline-item" style="background:var(--tag-purple-bg);color:var(--tag-purple);">
+          <span class="dot" style="background:var(--tag-purple);"></span>Cornell Ski and Snowboard Club
+        </span>
+        <span class="offline-item" style="background:var(--tag-teal-bg);color:var(--tag-teal);">
+          <span class="dot" style="background:var(--tag-teal);"></span>Association of Computer Science Undergraduates
+        </span>
       </div>
     </div>
   </section>
 
   <hr class="divider" />
 
-  <section id="media">
-    <p class="section-label reveal">Media</p>
-    <!-- List order: done → in progress → idea -->
-    <div class="wip-list">
-      <div class="wip-item wip-item--expandable reveal reveal-delay-1" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Hopper's</p>
-          <span class="wip-status wip-status--done">done</span>
-        </div>
-        <div class="wip-item-details">Just watched.</div>
+  <section id="projects">
+    <p class="section-label reveal">Featured</p>
+    <div class="project-card reveal reveal-delay-1">
+      <a href="https://github.com/cornellh4i/CHEM" target="_blank" rel="noopener noreferrer" class="project-card-external" aria-label="CHEM on GitHub">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <p class="project-name">CHEM — Endowment Manager</p>
+      <p class="project-desc">Fullstack endowment management system for Cornell Hack4Impact: optimizing fund allocation, tracking performance, and ensuring compliance for nonprofit clients.</p>
+      <div class="tag-row">
+        <span class="tag">Next.JS</span>
+        <span class="tag">React</span>
+        <span class="tag">Express.JS</span>
+        <span class="tag">Prisma</span>
+        <span class="tag">TypeScript</span>
       </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-2" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">The Maze Runner trilogy</p>
-          <span class="wip-status wip-status--done">done</span>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-repo-wrap">
+        <button type="button" class="project-repo-trigger" aria-label="Uplift GitHub repositories" aria-haspopup="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </button>
+        <div class="project-repo-dropdown" role="menu">
+          <a role="menuitem" href="https://github.com/cuappdev/uplift-ios-swiftui" target="_blank" rel="noopener noreferrer">iOS · SwiftUI</a>
+          <a role="menuitem" href="https://github.com/cuappdev/uplift-backend" target="_blank" rel="noopener noreferrer">Backend</a>
         </div>
-        <div class="wip-item-details">Finished all of them.</div>
       </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-3" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Super Mario Galaxy</p>
-          <span class="wip-status wip-status--done">done</span>
-        </div>
-        <div class="wip-item-details">Gravity, orchestration, Rosalina's story — still holds up.</div>
+      <p class="project-name">Uplift</p>
+      <p class="project-desc">Campus fitness app aggregating gym hours, capacity, and class schedules across Cornell's facilities; grown through targeted launches and iterative feature development.</p>
+      <div class="tag-row">
+        <span class="tag">Flask</span>
+        <span class="tag">GraphQL</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">SwiftUI</span>
+        <span class="tag">Xcode</span>
       </div>
-      <div class="wip-item wip-item--expandable reveal reveal-delay-4" tabindex="0">
-        <div class="wip-item-main">
-          <p class="wip-item-title">Project Hail Mary</p>
-          <span class="wip-status wip-status--idea">idea</span>
-        </div>
-        <div class="wip-item-details">On the list.</div>
+    </div>
+    <div class="project-card reveal reveal-delay-3">
+      <a href="https://github.com/cvepo/portfolio" target="_blank" rel="noopener noreferrer" class="project-card-external" aria-label="Portfolio repo on GitHub">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <p class="project-name">Portfolio Website</p>
+      <p class="project-desc">You're looking at it :)</p>
+      <div class="tag-row">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="experience">
+    <p class="section-label reveal">Experience</p>
+    <div class="exp-item reveal reveal-delay-1">
+      <div><p class="exp-role">Associate Product Manager</p><p class="exp-org"><a href="https://www.cornellappdev.com/" target="_blank" rel="noopener noreferrer">Cornell AppDev</a></p></div>
+      <p class="exp-date">2025 – present</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-2">
+      <div><p class="exp-role">Developer</p><p class="exp-org"><a href="https://www.cornellh4i.org/" target="_blank" rel="noopener noreferrer">Hack4Impact @ Cornell</a></p></div>
+      <p class="exp-date">2025 – present</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-3">
+      <div><p class="exp-role">AI/ML Fellow</p><p class="exp-org"><a href="https://www.breakthroughtech.org/" target="_blank" rel="noopener noreferrer">Break Through Tech | Cornell Tech</a></p></div>
+      <p class="exp-date">2026 – present</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-4">
+      <div><p class="exp-role">Software Engineer Intern</p><p class="exp-org"><a href="https://gettiming.com/" target="_blank" rel="noopener noreferrer">Timing</a></p></div>
+      <p class="exp-date">Spring 2026</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-5">
+      <div><p class="exp-role">Social Media Intern</p><p class="exp-org"><a href="https://www.jadaliyya.com/" target="_blank" rel="noopener noreferrer">Arab Studies Institute / Jadaliyya Project</a></p></div>
+      <p class="exp-date">Summer 2025</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-6">
+      <div><p class="exp-role">Operations Intern</p><p class="exp-org"><a href="https://www.justice.gov/crs" target="_blank" rel="noopener noreferrer">U.S. Department of Justice · Community Relations Service</a></p></div>
+      <p class="exp-date">Spring 2025</p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="contact">
+    <p class="section-label reveal">Contact</p>
+    <div class="contact-block reveal reveal-delay-1">
+      <p>Open to conversations about software, pickleball, or anything interesting. Reach out anytime.</p>
+      <div class="contact-links">
+        <a href="#" class="pill-link email-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.3"/></svg>
+          email
+        </a>
+        <a href="https://github.com/cvepo" target="_blank" class="pill-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          github
+        </a>
+        <a href="https://linkedin.com/in/enzo-hiu-123750245" target="_blank" rel="noopener noreferrer" class="pill-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 01.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+          linkedin
+        </a>
+        <a href="https://calendly.com/enzohiu06/30min" target="_blank" rel="noopener noreferrer" class="pill-link">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><rect x="2.5" y="3" width="11" height="11" rx="1"/><path d="M2.5 6.5h11M5.5 1.5V4M10.5 1.5V4"/></svg>
+          coffechat!
+        </a>
       </div>
     </div>
   </section>
 
   <footer class="reveal">
-    <span><a href="/main" class="wip-back">← home</a></span>
-    <span>enzo hiu · wip</span>
+    <span>enzo hiu · 2026</span>
+    <span>cornell cs '28</span>
   </footer>
 </main>
 </div>
@@ -790,6 +869,7 @@ footer {
 
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
+
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -797,7 +877,7 @@ footer {
         navLinks.forEach(a => {
           const href = a.getAttribute('href') || '';
           const isMain = a.classList.contains('nav-main-link');
-          const matchSection = href === `#${id}` || href === `/main#${id}`;
+          const matchSection = href === `#${id}` || href.endsWith(`#${id}`);
           const matchTop = id === 'top' && isMain;
           a.classList.toggle('active', matchSection || matchTop);
         });
@@ -805,13 +885,7 @@ footer {
     });
   }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
-  const onWipPage =
-    /\/wip\/?$/.test(location.pathname) ||
-    /wip\.html?$/.test(location.pathname) ||
-    /Portfolio\/wip\.html$/.test(location.pathname);
-  if (!onWipPage) {
-    sections.forEach(section => navObserver.observe(section));
-  }
+  sections.forEach(section => navObserver.observe(section));
 
   const sectionLabels = document.querySelectorAll('.section-label');
   const labelGlowObserver = new IntersectionObserver((entries) => {

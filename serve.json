@@ -1,9 +1,8 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/Portfolio/main.html" },
-    { "source": "/main", "destination": "/Portfolio/main.html" },
-    { "source": "/toolbox", "destination": "/Portfolio/toolbox.html" },
-    { "source": "/projects", "destination": "/Portfolio/projects.html" },
-    { "source": "/wip", "destination": "/Portfolio/wip.html" }
+    { "source": "/main", "destination": "/main.html" },
+    { "source": "/toolbox", "destination": "/toolbox.html" },
+    { "source": "/projects", "destination": "/projects.html" },
+    { "source": "/wip", "destination": "/wip.html" }
   ]
 }

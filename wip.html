@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WIP · Enzo Hiu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root { --transition: 0.2s ease; }
+
+[data-theme="dark"] {
+  --bg: #111110;
+  --bg2: #161615;
+  --surface: #1c1c1a;
+  --surface2: #222220;
+  --border: #2a2a27;
+  --border-strong: #3a3a36;
+  --text: #eeede8;
+  --text-2: #a8a8a0;
+  --text-3: #5a5a54;
+  --tag-blue-bg: #0e1e35; --tag-blue: #6aabf7;
+  --tag-green-bg: #0d2018; --tag-green: #5cc98a;
+  --tag-amber-bg: #251a08; --tag-amber: #f0a840;
+  --tag-purple-bg: #1a1530; --tag-purple: #a48ef5;
+  --tag-pink-bg: #281020; --tag-pink: #f07ab8;
+  --tag-teal-bg: #0a2022; --tag-teal: #4dcbb8;
+  --heading-glow: rgba(238, 237, 232, 0.55);
+  --heading-glow-soft: rgba(238, 237, 232, 0.18);
+}
+
+[data-theme="light"] {
+  --bg: #f9f9f8;
+  --bg2: #f4f4f2;
+  --surface: #f1f0ef;
+  --surface2: #eae9e6;
+  --border: #e3e2df;
+  --border-strong: #c8c7c4;
+  --text: #1a1a18;
+  --text-2: #4a4a47;
+  --text-3: #888884;
+  --tag-blue-bg: #e8f1fb; --tag-blue: #2a6db5;
+  --tag-green-bg: #e6f4ec; --tag-green: #2a7a4a;
+  --tag-amber-bg: #fef3e2; --tag-amber: #a06020;
+  --tag-purple-bg: #f0eefb; --tag-purple: #5a42b5;
+  --tag-pink-bg: #fceef5; --tag-pink: #b0387a;
+  --tag-teal-bg: #e4f5f2; --tag-teal: #1e7a6a;
+  --heading-glow: rgba(26, 26, 24, 0.35);
+  --heading-glow-soft: rgba(26, 26, 24, 0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Centered shell: nav + main as one block */
+.layout {
+  display: flex;
+  width: min(1240px, calc(100vw - 32px));
+  margin-inline: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-left: clamp(20px, 4vw, 36px);
+  padding-right: clamp(16px, 3vw, 28px);
+}
+
+/* SIDE NAV */
+.sidenav {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  width: 192px;
+  flex-shrink: 0;
+  height: 100vh;
+  padding: 48px 0 40px 28px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+  transition: background var(--transition), border-color var(--transition);
+  z-index: 100;
+}
+
+.nav-name {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeDown 0.5s 0.1s ease forwards;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.nav-links > .nav-block,
+.nav-links > .nav-projects-item,
+.nav-links > .nav-wip-item,
+.nav-links > .nav-toolbox-item {
+  opacity: 0;
+  animation: fadeRight 0.4s ease forwards;
+}
+.nav-links > .nav-block { animation-delay: 0.2s; }
+.nav-links > .nav-projects-item { animation-delay: 0.44s; }
+.nav-links > .nav-toolbox-item { animation-delay: 0.52s; }
+.nav-links > .nav-wip-item { animation-delay: 0.6s; }
+
+.nav-sub li {
+  opacity: 0;
+  animation: fadeRight 0.4s ease forwards;
+}
+.nav-sub li:nth-child(1) { animation-delay: 0.26s; }
+.nav-sub li:nth-child(2) { animation-delay: 0.3s; }
+.nav-sub li:nth-child(3) { animation-delay: 0.34s; }
+.nav-sub li:nth-child(4) { animation-delay: 0.38s; }
+
+.nav-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-main-link {
+  font-weight: 500;
+  color: var(--text-2);
+}
+.nav-main-link.active { color: var(--text); }
+.nav-sub {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 12px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.page-wip .nav-sub {
+  display: none;
+}
+.page-wip .nav-main-link {
+  color: var(--text-3);
+}
+.page-wip .nav-main-link:hover { color: var(--text); }
+.page-main .nav-projects-item a.active,
+.page-main .nav-wip-item a.active,
+.page-main .nav-toolbox-item a.active { color: var(--text); }
+.page-wip .nav-projects-item a.active,
+.page-wip .nav-wip-item a.active,
+.page-wip .nav-toolbox-item a.active { color: var(--text); }
+
+.nav-links a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--text-3);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.15s;
+}
+.nav-links a::before {
+  content: '';
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.2s ease;
+  flex-shrink: 0;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::before,
+.nav-links a.active::before { width: 14px; }
+.nav-links a.active { color: var(--text); }
+
+.nav-links .nav-sub a {
+  font-size: 11px;
+}
+
+.nav-bottom {
+  margin-top: auto;
+  padding-top: 32px;
+  opacity: 0;
+  animation: fadeUp 0.4s 0.58s ease forwards;
+}
+
+.theme-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.02em;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.theme-btn:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+.theme-icon-img {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  transition: filter 0.35s ease;
+}
+html[data-theme="light"] .theme-icon-img {
+  filter: invert(1);
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+  padding: 0 40px 120px 44px;
+}
+
+section { padding-top: 88px; }
+
+/* HERO */
+.hero { padding-top: 100px; }
+
+.hero-eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.5s 0.15s ease forwards;
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.25s ease forwards;
+}
+.hero h1 em { font-style: italic; color: var(--text-2); }
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--text-2);
+  max-width: none;
+  line-height: 1.7;
+  margin-bottom: 0;
+  opacity: 0;
+  animation: fadeUp 0.5s 0.38s ease forwards;
+}
+
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  text-decoration: none;
+  background: var(--surface);
+  transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.15s;
+  letter-spacing: -0.01em;
+}
+.pill-link:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+  background: var(--surface2);
+  transform: translateY(-1px);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 64px 0 0;
+}
+
+.section-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 24px;
+  margin-top: 4px;
+  transition: color 0.55s ease, text-shadow 0.65s ease, filter 0.65s ease;
+}
+.section-label.section-label--glow {
+  color: var(--text-2);
+  text-shadow:
+    0 0 12px var(--heading-glow-soft),
+    0 0 28px var(--heading-glow),
+    0 0 48px var(--heading-glow-soft);
+  filter: drop-shadow(0 0 1px var(--heading-glow-soft));
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.4s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+.reveal-delay-7 { transition-delay: 0.56s; }
+.reveal-delay-8 { transition-delay: 0.64s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .section-label { transition: none; }
+  .section-label.section-label--glow {
+    text-shadow: none;
+    filter: none;
+    color: var(--text-2);
+  }
+  .wip-item-details { transition: none; }
+}
+
+/* ABOUT */
+.about-bio {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.about-card:hover { border-color: var(--border-strong); background: var(--surface2); }
+.about-card-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.about-card p { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+.offline-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 12px;
+}
+.offline-list { display: flex; flex-wrap: wrap; gap: 7px; }
+.offline-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: 1px solid transparent;
+  transition: transform 0.15s;
+  cursor: default;
+}
+.offline-item:hover { transform: translateY(-1px); }
+.offline-item .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+/* EXPERIENCE */
+.exp-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 16px;
+  padding: 18px 0;
+  align-items: start;
+}
+.exp-role { font-size: 14px; font-weight: 500; color: var(--text); }
+.exp-org { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.exp-org a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.15s, border-color 0.15s;
+}
+.exp-org a:hover {
+  color: var(--text);
+  border-bottom-color: var(--text-3);
+}
+.exp-date {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  white-space: nowrap;
+  padding-top: 3px;
+}
+/* CONTACT */
+.contact-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 30px;
+  transition: border-color 0.2s;
+}
+.contact-block:hover { border-color: var(--border-strong); }
+.contact-block p { font-size: 15px; color: var(--text-2); margin-bottom: 22px; line-height: 1.7; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+footer {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* WIP */
+.wip-hero-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.25s ease forwards;
+}
+.wip-hero-title em { font-style: italic; color: var(--text-2); }
+.wip-list { display: flex; flex-direction: column; gap: 10px; }
+.wip-item {
+  position: relative;
+  z-index: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg2);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.wip-item:hover,
+.wip-item:focus-within {
+  z-index: 5;
+  border-color: var(--border-strong);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+.wip-item--expandable { outline: none; }
+.wip-item--expandable:focus-visible {
+  box-shadow: 0 0 0 2px var(--border-strong);
+}
+.wip-item-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.wip-item-title {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.wip-item-details {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
+}
+[data-theme="dark"] .wip-item-details {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.wip-item--expandable:hover .wip-item-details,
+.wip-item--expandable:focus-within .wip-item-details {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.wip-status {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  margin-top: 2px;
+  text-transform: lowercase;
+}
+.wip-status--idea { background: var(--tag-amber-bg); color: var(--tag-amber); }
+.wip-status--progress { background: var(--tag-blue-bg); color: var(--tag-blue); }
+.wip-status--done { background: var(--tag-green-bg); color: var(--tag-green); }
+.wip-back {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.15s, border-color 0.15s;
+}
+.wip-back:hover { color: var(--text); border-bottom-color: var(--text-3); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 740px) {
+  .layout {
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .sidenav {
+    width: 100%; height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-name { margin-bottom: 0; }
+  .nav-links { flex-direction: column; align-items: flex-start; gap: 10px; flex: unset; }
+  .page-main .nav-sub {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    padding-left: 0;
+    gap: 8px 14px;
+    margin-top: 2px;
+  }
+  .nav-links a::before { display: none; }
+  .nav-bottom { margin-top: 0; padding-top: 0; }
+  main { padding: 0 24px 80px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 40px; }
+  .wip-hero-title { font-size: 40px; }
+  .wip-item--expandable .wip-item-details {
+    position: static;
+    margin-top: 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    box-shadow: none;
+    background: var(--bg2);
+  }
+  .wip-item--expandable:hover,
+  .wip-item--expandable:focus-within {
+    transform: none;
+  }
+}
+</style>
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body class="page-wip">
+
+<div class="layout">
+<nav class="sidenav">
+  <a href="/#top" class="nav-name">enzo hiu</a>
+  <ul class="nav-links">
+    <li class="nav-block">
+      <a href="https://vepo.studio/" class="nav-main-link">main</a>
+      <ul class="nav-sub">
+        <li><a href="/#about">about</a></li>
+        <li><a href="/#projects">projects</a></li>
+        <li><a href="/#experience">experience</a></li>
+        <li><a href="/#contact">contact</a></li>
+      </ul>
+    </li>
+    <li class="nav-projects-item"><a href="/projects">projects&nbsp;🚧</a></li>
+    <li class="nav-toolbox-item"><a href="/toolbox">toolbox</a></li>
+    <!-- Nav order: keep wip as the last list item. Add new links above wip unless one should go after it. -->
+    <li class="nav-wip-item"><a href="/wip" class="active">wip</a></li>
+  </ul>
+  <div class="nav-bottom">
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+      <img id="themeIcon" class="theme-icon-img" src="/assets/theme-koi-yin-yang.png" width="18" height="18" alt="" decoding="async" />
+      <span id="themeLabel">light</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="top">
+    <h1 class="wip-hero-title"><em>wip.</em></h1>
+    <p class="hero-sub">things i'm thinking about</p>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="on-site">
+    <p class="section-label reveal">On the site</p>
+    <!-- List order: done → in progress → idea -->
+    <div class="wip-list">
+      <div class="wip-item reveal reveal-delay-1">
+        <div class="wip-item-main">
+          <p class="wip-item-title">This WIP scratchpad (you are here).</p>
+          <span class="wip-status wip-status--done">done</span>
+        </div>
+      </div>
+      <div class="wip-item reveal reveal-delay-2">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Toolbox page</p>
+          <span class="wip-status wip-status--done">done</span>
+        </div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-3" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Blurb / blog board</p>
+          <span class="wip-status wip-status--idea">idea</span>
+        </div>
+        <div class="wip-item-details">A minimal stream of short thoughts, links, and updates without the overhead of a full blog.</div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-4" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Detailed about page</p>
+          <span class="wip-status wip-status--idea">idea</span>
+        </div>
+        <div class="wip-item-details">More about who I am beyond the bio: background, interests, what I care about building.</div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-5" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Photo gallery</p>
+          <span class="wip-status wip-status--idea">idea</span>
+        </div>
+        <div class="wip-item-details">A simple grid of photos: life, travel, random moments.</div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-6" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Experience deep-dives</p>
+          <span class="wip-status wip-status--idea">idea</span>
+        </div>
+        <div class="wip-item-details">Proper write-ups for each role with context, what I worked on, and what I learned.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="media">
+    <p class="section-label reveal">Media</p>
+    <!-- List order: done → in progress → idea -->
+    <div class="wip-list">
+      <div class="wip-item wip-item--expandable reveal reveal-delay-1" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Hopper's</p>
+          <span class="wip-status wip-status--done">done</span>
+        </div>
+        <div class="wip-item-details">Just watched.</div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-2" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">The Maze Runner trilogy</p>
+          <span class="wip-status wip-status--done">done</span>
+        </div>
+        <div class="wip-item-details">Finished all of them.</div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-3" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Super Mario Galaxy</p>
+          <span class="wip-status wip-status--done">done</span>
+        </div>
+        <div class="wip-item-details">Gravity, orchestration, Rosalina's story — still holds up.</div>
+      </div>
+      <div class="wip-item wip-item--expandable reveal reveal-delay-4" tabindex="0">
+        <div class="wip-item-main">
+          <p class="wip-item-title">Project Hail Mary</p>
+          <span class="wip-status wip-status--idea">idea</span>
+        </div>
+        <div class="wip-item-details">On the list.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <span><a href="/" class="wip-back">← home</a></span>
+    <span>enzo hiu · wip</span>
+  </footer>
+</main>
+</div>
+
+<script>
+  const e = 'emh274' + '@' + 'cornell.edu';
+  document.querySelectorAll('a.email-link').forEach(a => { a.href = 'mailto:' + e; });
+
+  const toggle = document.getElementById('themeToggle');
+  const label = document.getElementById('themeLabel');
+  const html = document.documentElement;
+
+  function applyTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    const isDark = theme === 'dark';
+    label.textContent = isDark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', theme); } catch (_) {}
+  }
+
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') applyTheme(saved);
+  } catch (_) {}
+
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    applyTheme(isDark ? 'light' : 'dark');
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 1200);
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(a => {
+          const href = a.getAttribute('href') || '';
+          const isMain = a.classList.contains('nav-main-link');
+          const matchSection = href === `#${id}` || href === `/#${id}`;
+          const matchTop = id === 'top' && isMain;
+          a.classList.toggle('active', matchSection || matchTop);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+  const onWipPage =
+    /\/wip\/?$/.test(location.pathname) ||
+    /wip\.html?$/.test(location.pathname) ||
+    /Portfolio\/wip\.html$/.test(location.pathname);
+  if (!onWipPage) {
+    sections.forEach(section => navObserver.observe(section));
+  }
+
+  const sectionLabels = document.querySelectorAll('.section-label');
+  const labelGlowObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('section-label--glow', entry.isIntersecting);
+    });
+  }, { threshold: 0.35, rootMargin: '-8% 0px -45% 0px' });
+
+  sectionLabels.forEach((el) => labelGlowObserver.observe(el));
+</script>
+</body>
+</html>
