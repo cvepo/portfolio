@@ -46,7 +46,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .nav-links{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
 .nav-links>.nav-block,.nav-links>.nav-projects-item,.nav-links>.nav-wip-item,.nav-links>.nav-uses-item{opacity:0;animation:fadeRight 0.4s ease forwards}
 .nav-links>.nav-block{animation-delay:0.2s}.nav-links>.nav-projects-item{animation-delay:0.44s}
-.nav-links>.nav-wip-item{animation-delay:0.52s}.nav-links>.nav-uses-item{animation-delay:0.6s}
+.nav-links>.nav-uses-item{animation-delay:0.52s}.nav-links>.nav-wip-item{animation-delay:0.6s}
 .nav-sub li{opacity:0;animation:fadeRight 0.4s ease forwards}
 .nav-sub li:nth-child(1){animation-delay:0.26s}.nav-sub li:nth-child(2){animation-delay:0.3s}
 .nav-sub li:nth-child(3){animation-delay:0.34s}.nav-sub li:nth-child(4){animation-delay:0.38s}
@@ -55,6 +55,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .nav-main-link.active{color:var(--text)}
 .nav-sub{list-style:none;margin:0;padding:0 0 0 12px;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
 .page-main .nav-projects-item a.active,.page-main .nav-wip-item a.active,.page-main .nav-uses-item a.active{color:var(--text)}
+.nav-links .nav-wip-item{margin-top:auto}
 .nav-links a{font-family:'Geist Mono',monospace;font-size:12px;color:var(--text-3);text-decoration:none;letter-spacing:-0.01em;padding:5px 0;display:flex;align-items:center;gap:8px;transition:color 0.15s}
 .nav-links a::before{content:'';width:0;height:1px;background:currentColor;transition:width 0.2s ease;flex-shrink:0}
 .nav-links a:hover{color:var(--text)}.nav-links a:hover::before,.nav-links a.active::before{width:14px}.nav-links a.active{color:var(--text)}
@@ -140,7 +141,7 @@ footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeRight{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
-@media(max-width:740px){.layout{flex-direction:column;width:100%;padding-left:0;padding-right:0}.sidenav{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border);padding:20px 24px;flex-direction:row;align-items:center;justify-content:space-between}.nav-name{margin-bottom:0}.nav-links{flex-direction:column;align-items:flex-start;gap:10px;flex:unset}.page-main .nav-sub{flex-direction:row;flex-wrap:wrap;border-left:none;padding-left:0;gap:8px 14px;margin-top:2px}.nav-links a::before{display:none}.nav-bottom{margin-top:0;padding-top:0}main{padding:0 24px 80px}.hero h1{font-size:40px}.device-card{max-width:100%}}
+@media(max-width:740px){.layout{flex-direction:column;width:100%;padding-left:0;padding-right:0}.sidenav{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border);padding:20px 24px;flex-direction:row;align-items:center;justify-content:space-between}.nav-name{margin-bottom:0}.nav-links{flex-direction:column;align-items:flex-start;gap:10px;flex:unset}.page-main .nav-sub{flex-direction:row;flex-wrap:wrap;border-left:none;padding-left:0;gap:8px 14px;margin-top:2px}.nav-links a::before{display:none}.nav-wip-item{margin-top:0}.nav-bottom{margin-top:0;padding-top:0}main{padding:0 24px 80px}.hero h1{font-size:40px}.device-card{max-width:100%}}
 </style>
 </head>
 <body class="page-main">
@@ -158,8 +159,9 @@ footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3
         </ul>
       </li>
       <li class="nav-projects-item"><a href="projects.html">projects&nbsp;🚧</a></li>
-      <li class="nav-wip-item"><a href="wip.html">wip</a></li>
       <li class="nav-uses-item"><a href="uses.html" class="active">uses</a></li>
+      <!-- Nav order: keep wip last in this ul. Add new items above wip unless a page should sit below wip. -->
+      <li class="nav-wip-item"><a href="wip.html">wip</a></li>
     </ul>
     <div class="nav-bottom">
       <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
@@ -319,21 +321,22 @@ footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3
 <div id="overlay"></div>
 <div class="spec-popup" id="popup-desktop">
   <div class="popup-head"><span class="popup-title">desktop</span><button class="popup-close" onclick="closePopup()">&#x2715;</button></div>
-  <div class="spec-row"><span class="spec-k">cpu</span><span class="spec-v">&#8212; update me</span></div>
-  <div class="spec-row"><span class="spec-k">gpu</span><span class="spec-v">&#8212; update me</span></div>
-  <div class="spec-row"><span class="spec-k">ram</span><span class="spec-v">&#8212; update me</span></div>
-  <div class="spec-row"><span class="spec-k">storage</span><span class="spec-v">&#8212; update me</span></div>
-  <div class="spec-row"><span class="spec-k">monitor</span><span class="spec-v">&#8212; update me</span></div>
-  <div class="spec-row"><span class="spec-k">os</span><span class="spec-v">&#8212; update me</span></div>
+  <div class="spec-row"><span class="spec-k">cpu</span><span class="spec-v">AMD Ryzen 7 3700X</span></div>
+  <div class="spec-row"><span class="spec-k">gpu</span><span class="spec-v">ASUS ROG Strix RX 5700 XT</span></div>
+  <div class="spec-row"><span class="spec-k">ram</span><span class="spec-v">32 GB DDR4 3200 MHz G.Skill Trident Z</span></div>
+  <div class="spec-row"><span class="spec-k">storage</span><span class="spec-v">512 GB SSD + 2 TB HDD</span></div>
+  <div class="spec-row"><span class="spec-k">monitor</span><span class="spec-v">1440p 144Hz</span></div>
+  <div class="spec-row"><span class="spec-k">os</span><span class="spec-v">Windows 11 25H2</span></div>
 </div>
 <div class="spec-popup" id="popup-laptop">
   <div class="popup-head"><span class="popup-title">laptop</span><button class="popup-close" onclick="closePopup()">&#x2715;</button></div>
-  <div class="spec-row"><span class="spec-k">model</span><span class="spec-v">MacBook Pro 14&quot;</span></div>
-  <div class="spec-row"><span class="spec-k">chip</span><span class="spec-v">Apple M3 Pro</span></div>
-  <div class="spec-row"><span class="spec-k">ram</span><span class="spec-v">18 GB unified</span></div>
+  <div class="spec-row"><span class="spec-k">model</span><span class="spec-v">MacBook Pro 15&quot; (2019)</span></div>
+  <div class="spec-row"><span class="spec-k">cpu</span><span class="spec-v">Intel Core i9-9880H &#183; 8-core &#183; 2.3 GHz</span></div>
+  <div class="spec-row"><span class="spec-k">gpu</span><span class="spec-v">AMD Radeon Pro 560X &#183; 4 GB GDDR5</span></div>
+  <div class="spec-row"><span class="spec-k">ram</span><span class="spec-v">16 GB DDR4 2400 MHz</span></div>
   <div class="spec-row"><span class="spec-k">storage</span><span class="spec-v">512 GB SSD</span></div>
-  <div class="spec-row"><span class="spec-k">display</span><span class="spec-v">14.2&quot; Liquid Retina XDR</span></div>
-  <div class="spec-row"><span class="spec-k">os</span><span class="spec-v">macOS Sequoia</span></div>
+  <div class="spec-row"><span class="spec-k">display</span><span class="spec-v">15.4&quot; Retina &#183; 2880&#215;1800 &#183; 220 ppi</span></div>
+  <div class="spec-row"><span class="spec-k">os</span><span class="spec-v">macOS Sequoia 15.7.4</span></div>
 </div>
 
 <script>
