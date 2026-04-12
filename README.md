@@ -1,4 +1,4 @@
-A living record of me — updated whenever I remember this exists.
+Personal Portfolio Website.
 
 Stack
 HTML/CSS/JS — no frameworks
