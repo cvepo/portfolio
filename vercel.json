@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/toolbox.html", "destination": "/toolbox", "permanent": true },
+    { "source": "/projects.html", "destination": "/projects", "permanent": true },
+    { "source": "/wip.html", "destination": "/wip", "permanent": true }
+  ]
+}
