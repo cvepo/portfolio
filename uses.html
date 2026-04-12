@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>uses — enzo hiu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--transition:0.2s ease}
+[data-theme="dark"]{
+  --bg:#111110;--bg2:#161615;--surface:#1c1c1a;--surface2:#222220;
+  --border:#2a2a27;--border-strong:#3a3a36;
+  --text:#eeede8;--text-2:#a8a8a0;--text-3:#5a5a54;
+  --tag-blue-bg:#0e1e35;--tag-blue:#6aabf7;
+  --tag-green-bg:#0d2018;--tag-green:#5cc98a;
+  --tag-amber-bg:#251a08;--tag-amber:#f0a840;
+  --tag-purple-bg:#1a1530;--tag-purple:#a48ef5;
+  --tag-pink-bg:#281020;--tag-pink:#f07ab8;
+  --tag-teal-bg:#0a2022;--tag-teal:#4dcbb8;
+  --tag-red-bg:#301418;--tag-red:#e87070;
+  --heading-glow:rgba(238,237,232,0.55);--heading-glow-soft:rgba(238,237,232,0.18);
+  --icon-color:#eeede8;--icon-muted:#5a5a54;
+}
+[data-theme="light"]{
+  --bg:#f9f9f8;--bg2:#f4f4f2;--surface:#f1f0ef;--surface2:#eae9e6;
+  --border:#e3e2df;--border-strong:#c8c7c4;
+  --text:#1a1a18;--text-2:#4a4a47;--text-3:#888884;
+  --tag-blue-bg:#e8f1fb;--tag-blue:#2a6db5;
+  --tag-green-bg:#e6f4ec;--tag-green:#2a7a4a;
+  --tag-amber-bg:#fef3e2;--tag-amber:#a06020;
+  --tag-purple-bg:#f0eefb;--tag-purple:#5a42b5;
+  --tag-pink-bg:#fceef5;--tag-pink:#b0387a;
+  --tag-teal-bg:#e4f5f2;--tag-teal:#1e7a6a;
+  --tag-red-bg:#fce8e8;--tag-red:#b83232;
+  --heading-glow:rgba(26,26,24,0.35);--heading-glow-soft:rgba(26,26,24,0.12);
+  --icon-color:#1a1a18;--icon-muted:#888884;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;min-height:100vh;transition:background var(--transition),color var(--transition)}
+.layout{display:flex;width:min(1240px,calc(100vw - 32px));margin-inline:auto;min-height:100vh;box-sizing:border-box;padding-left:clamp(20px,4vw,36px);padding-right:clamp(16px,3vw,28px)}
+.sidenav{position:sticky;top:0;align-self:flex-start;width:192px;flex-shrink:0;height:100vh;padding:48px 0 40px 28px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--bg);transition:background var(--transition),border-color var(--transition);z-index:100}
+.nav-name{font-family:'Geist Mono',monospace;font-size:13px;font-weight:500;color:var(--text);text-decoration:none;letter-spacing:-0.02em;margin-bottom:40px;opacity:0;animation:fadeDown 0.5s 0.1s ease forwards}
+.nav-links{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
+.nav-links>.nav-block,.nav-links>.nav-projects-item,.nav-links>.nav-wip-item,.nav-links>.nav-uses-item{opacity:0;animation:fadeRight 0.4s ease forwards}
+.nav-links>.nav-block{animation-delay:0.2s}.nav-links>.nav-projects-item{animation-delay:0.44s}
+.nav-links>.nav-wip-item{animation-delay:0.52s}.nav-links>.nav-uses-item{animation-delay:0.6s}
+.nav-sub li{opacity:0;animation:fadeRight 0.4s ease forwards}
+.nav-sub li:nth-child(1){animation-delay:0.26s}.nav-sub li:nth-child(2){animation-delay:0.3s}
+.nav-sub li:nth-child(3){animation-delay:0.34s}.nav-sub li:nth-child(4){animation-delay:0.38s}
+.nav-block{display:flex;flex-direction:column;gap:4px}
+.nav-main-link{font-weight:500;color:var(--text-2)}
+.nav-main-link.active{color:var(--text)}
+.nav-sub{list-style:none;margin:0;padding:0 0 0 12px;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
+.page-main .nav-projects-item a.active,.page-main .nav-wip-item a.active,.page-main .nav-uses-item a.active{color:var(--text)}
+.nav-links a{font-family:'Geist Mono',monospace;font-size:12px;color:var(--text-3);text-decoration:none;letter-spacing:-0.01em;padding:5px 0;display:flex;align-items:center;gap:8px;transition:color 0.15s}
+.nav-links a::before{content:'';width:0;height:1px;background:currentColor;transition:width 0.2s ease;flex-shrink:0}
+.nav-links a:hover{color:var(--text)}.nav-links a:hover::before,.nav-links a.active::before{width:14px}.nav-links a.active{color:var(--text)}
+.nav-links .nav-sub a{font-size:11px}
+.nav-bottom{margin-top:auto;padding-top:32px;opacity:0;animation:fadeUp 0.4s 0.58s ease forwards}
+.theme-btn{background:none;border:1px solid var(--border);color:var(--text-3);font-family:'Geist Mono',monospace;font-size:11px;padding:6px 10px;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:6px;letter-spacing:0.02em;transition:color 0.15s,border-color 0.15s,background 0.15s}
+.theme-btn:hover{color:var(--text);border-color:var(--border-strong);background:var(--surface)}
+.theme-icon-img{width:18px;height:18px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;transition:filter 0.35s ease}
+html[data-theme="light"] .theme-icon-img{filter:invert(1)}
+main{flex:1;min-width:0;padding:0 40px 120px 44px}
+section{padding-top:88px}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.08s}.reveal-delay-2{transition-delay:0.16s}
+.reveal-delay-3{transition-delay:0.24s}.reveal-delay-4{transition-delay:0.32s}
+.reveal-delay-5{transition-delay:0.40s}.reveal-delay-6{transition-delay:0.48s}
+.reveal-delay-7{transition-delay:0.56s}.reveal-delay-8{transition-delay:0.64s}
+.reveal-delay-9{transition-delay:0.72s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.section-label{transition:none}.section-label.section-label--glow{text-shadow:none;filter:none;color:var(--text-2)}}
+.section-label{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-3);margin-bottom:24px;margin-top:4px;transition:color 0.55s ease,text-shadow 0.65s ease,filter 0.65s ease}
+.section-label.section-label--glow{color:var(--text-2);text-shadow:0 0 12px var(--heading-glow-soft),0 0 28px var(--heading-glow),0 0 48px var(--heading-glow-soft);filter:drop-shadow(0 0 1px var(--heading-glow-soft))}
+.divider{border:none;border-top:1px solid var(--border);margin:64px 0 0}
+.hero{padding-top:100px}
+.hero-eyebrow{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;opacity:0;animation:fadeUp 0.5s 0.15s ease forwards}
+.hero h1{font-family:'Instrument Serif',serif;font-size:58px;font-weight:400;line-height:1.05;letter-spacing:-0.025em;margin-bottom:20px;opacity:0;animation:fadeUp 0.6s 0.25s ease forwards}
+.hero h1 em{font-style:italic;color:var(--text-2)}
+.hero-sub{font-size:15px;color:var(--text-2);line-height:1.7;max-width:480px;opacity:0;animation:fadeUp 0.5s 0.38s ease forwards}
+.device-stage{display:flex;gap:12px;flex-wrap:wrap}
+.device-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px 24px 20px;cursor:pointer;flex:1;min-width:200px;max-width:300px;display:flex;flex-direction:column;align-items:center;gap:14px;transition:border-color 0.2s,background 0.2s,transform 0.25s cubic-bezier(0.34,1.56,0.64,1);user-select:none;-webkit-tap-highlight-color:transparent}
+.device-card:hover{border-color:var(--border-strong);background:var(--surface2);transform:translateY(-3px)}
+.device-card:focus-visible{outline:2px solid var(--text-3);outline-offset:3px}
+.device-hint{position:absolute;top:11px;right:13px;font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:4px;transition:color 0.2s}
+.device-card:hover .device-hint{color:var(--text-2)}
+.device-hint::after{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:0.4}50%{opacity:1}}
+.d-body{fill:var(--bg2);stroke:var(--border-strong);stroke-width:1}
+.d-screen{fill:var(--surface2)}.d-stand{fill:var(--surface);stroke:var(--border-strong);stroke-width:1}
+.d-line{stroke:var(--border-strong);stroke-width:0.7;opacity:0.6}.d-block{fill:var(--border);opacity:0.6}
+.device-name{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3);letter-spacing:-0.01em}
+.spec-popup{position:fixed;z-index:300;background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;padding:18px 20px;width:268px;box-shadow:0 0 0 1px var(--border),0 20px 40px rgba(0,0,0,0.4);opacity:0;transform:scale(0.95) translateY(6px);pointer-events:none;transition:opacity 0.18s ease,transform 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+.spec-popup.open{opacity:1;transform:scale(1) translateY(0);pointer-events:all}
+.popup-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.popup-title{font-family:'Instrument Serif',serif;font-size:15px;font-style:italic;color:var(--text)}
+.popup-close{background:none;border:1px solid var(--border);color:var(--text-3);width:20px;height:20px;border-radius:4px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.popup-close:hover{border-color:var(--border-strong);color:var(--text)}
+.spec-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;border-bottom:1px solid var(--border)}
+.spec-row:last-child{border-bottom:none;padding-bottom:0}
+.spec-k{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);flex-shrink:0}
+.spec-v{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-2);text-align:right}
+#overlay{position:fixed;inset:0;z-index:200;display:none}
+#overlay.on{display:block}
+.tool-icon,.lang-icon{display:inline-block;flex-shrink:0;background-color:var(--icon-color);transition:background-color var(--transition);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+.tool-icon{width:18px;height:18px}
+.lang-icon{width:13px;height:13px;background-color:var(--icon-muted)}
+.lang-pill:hover .lang-icon{background-color:var(--text-2)}
+.tool-icon--cursor{-webkit-mask-image:url('https://cdn.simpleicons.org/cursor');mask-image:url('https://cdn.simpleicons.org/cursor')}
+.tool-icon--visualstudiocode{-webkit-mask-image:url('https://cdn.simpleicons.org/visualstudiocode');mask-image:url('https://cdn.simpleicons.org/visualstudiocode')}
+.tool-icon--anthropic{-webkit-mask-image:url('https://cdn.simpleicons.org/anthropic');mask-image:url('https://cdn.simpleicons.org/anthropic')}
+.tool-icon--git{-webkit-mask-image:url('https://cdn.simpleicons.org/git');mask-image:url('https://cdn.simpleicons.org/git')}
+.tool-icon--github{-webkit-mask-image:url('https://cdn.simpleicons.org/github');mask-image:url('https://cdn.simpleicons.org/github')}
+.tool-icon--docker{-webkit-mask-image:url('https://cdn.simpleicons.org/docker');mask-image:url('https://cdn.simpleicons.org/docker')}
+.tool-icon--vercel{-webkit-mask-image:url('https://cdn.simpleicons.org/vercel');mask-image:url('https://cdn.simpleicons.org/vercel')}
+.tool-icon--notion{-webkit-mask-image:url('https://cdn.simpleicons.org/notion');mask-image:url('https://cdn.simpleicons.org/notion')}
+.tool-icon--figma{-webkit-mask-image:url('https://cdn.simpleicons.org/figma');mask-image:url('https://cdn.simpleicons.org/figma')}
+.lang-icon--javascript{-webkit-mask-image:url('https://cdn.simpleicons.org/javascript');mask-image:url('https://cdn.simpleicons.org/javascript')}
+.lang-icon--typescript{-webkit-mask-image:url('https://cdn.simpleicons.org/typescript');mask-image:url('https://cdn.simpleicons.org/typescript')}
+.lang-icon--python{-webkit-mask-image:url('https://cdn.simpleicons.org/python');mask-image:url('https://cdn.simpleicons.org/python')}
+.lang-icon--java{-webkit-mask-image:url('https://cdn.simpleicons.org/openjdk');mask-image:url('https://cdn.simpleicons.org/openjdk')}
+.lang-icon--html{-webkit-mask-image:url('https://cdn.simpleicons.org/html5');mask-image:url('https://cdn.simpleicons.org/html5')}
+.lang-icon--css{-webkit-mask-image:url('https://cdn.simpleicons.org/css3');mask-image:url('https://cdn.simpleicons.org/css3')}
+.lang-icon--swift{-webkit-mask-image:url('https://cdn.simpleicons.org/swift');mask-image:url('https://cdn.simpleicons.org/swift')}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:10px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:5px;transition:border-color 0.2s,background 0.2s}
+.tool-card:hover{border-color:var(--border-strong);background:var(--surface2)}
+.tool-card-top{display:flex;align-items:center;gap:9px;margin-bottom:3px}
+.tool-name{font-family:'Geist Mono',monospace;font-size:12px;font-weight:500;color:var(--text)}
+.tool-desc{font-size:13px;color:var(--text-2);line-height:1.55;flex:1}
+.langs-list{display:flex;flex-wrap:wrap;gap:8px}
+.lang-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-2);transition:border-color 0.2s,background 0.2s,color 0.2s,transform 0.2s}
+.lang-pill:hover{border-color:var(--border-strong);background:var(--surface2);color:var(--text);transform:translateY(-1px)}
+footer{margin-top:80px;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:740px){.layout{flex-direction:column;width:100%;padding-left:0;padding-right:0}.sidenav{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--border);padding:20px 24px;flex-direction:row;align-items:center;justify-content:space-between}.nav-name{margin-bottom:0}.nav-links{flex-direction:column;align-items:flex-start;gap:10px;flex:unset}.page-main .nav-sub{flex-direction:row;flex-wrap:wrap;border-left:none;padding-left:0;gap:8px 14px;margin-top:2px}.nav-links a::before{display:none}.nav-bottom{margin-top:0;padding-top:0}main{padding:0 24px 80px}.hero h1{font-size:40px}.device-card{max-width:100%}}
+</style>
+</head>
+<body class="page-main">
+<div class="layout">
+  <nav class="sidenav">
+    <a href="index.html#top" class="nav-name">enzo hiu</a>
+    <ul class="nav-links">
+      <li class="nav-block">
+        <a href="index.html#top" class="nav-main-link">main</a>
+        <ul class="nav-sub">
+          <li><a href="index.html#about">about</a></li>
+          <li><a href="index.html#projects">featured</a></li>
+          <li><a href="index.html#experience">experience</a></li>
+          <li><a href="index.html#contact">contact</a></li>
+        </ul>
+      </li>
+      <li class="nav-projects-item"><a href="projects.html">projects&nbsp;🚧</a></li>
+      <li class="nav-wip-item"><a href="wip.html">wip</a></li>
+      <li class="nav-uses-item"><a href="uses.html" class="active">uses</a></li>
+    </ul>
+    <div class="nav-bottom">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <img id="themeIcon" class="theme-icon-img" src="assets/theme-koi-yin-yang.png" width="18" height="18" alt="" decoding="async" />
+        <span id="themeLabel">light</span>
+      </button>
+    </div>
+  </nav>
+  <main>
+    <section class="hero" id="top">
+      <p class="hero-eyebrow">setup &amp; tools</p>
+      <h1>what I <em>use</em></h1>
+      <p class="hero-sub">Hardware, software, and the AI tools I reach for daily. Click the devices to see specs.</p>
+    </section>
+    <hr class="divider" />
+    <section id="hardware">
+      <p class="section-label reveal">Hardware</p>
+      <div class="device-stage">
+        <div class="device-card reveal reveal-delay-1" id="dev-desktop" tabindex="0" role="button" aria-label="Desktop — click for specs">
+          <span class="device-hint">specs</span>
+          <svg width="130" height="130" viewBox="0 0 130 130" fill="none">
+            <rect class="d-stand" x="47" y="116" width="36" height="5" rx="2.5"/>
+            <rect class="d-stand" x="59" y="100" width="12" height="18"/>
+            <rect class="d-body" x="6" y="10" width="118" height="92" rx="6"/>
+            <rect class="d-screen" x="12" y="16" width="106" height="76" rx="3"/>
+            <line class="d-line" x1="20" y1="30" x2="58" y2="30"/>
+            <line class="d-line" x1="20" y1="38" x2="48" y2="38" opacity="0.4"/>
+            <line class="d-line" x1="20" y1="46" x2="52" y2="46" opacity="0.4"/>
+            <rect class="d-block" x="20" y="54" width="46" height="28" rx="2"/>
+            <line class="d-line" x1="26" y1="62" x2="54" y2="62"/>
+            <line class="d-line" x1="26" y1="70" x2="48" y2="70" opacity="0.5"/>
+            <rect class="d-block" x="74" y="22" width="36" height="52" rx="2" opacity="0.5"/>
+            <circle cx="65" cy="98" r="2.5" fill="none" stroke="var(--border-strong)" stroke-width="1"/>
+          </svg>
+          <span class="device-name">desktop</span>
+        </div>
+        <div class="device-card reveal reveal-delay-2" id="dev-laptop" tabindex="0" role="button" aria-label="Laptop — click for specs">
+          <span class="device-hint">specs</span>
+          <svg width="150" height="106" viewBox="0 0 150 106" fill="none">
+            <rect class="d-body" x="10" y="5" width="130" height="82" rx="6"/>
+            <rect class="d-screen" x="16" y="11" width="118" height="70" rx="3"/>
+            <circle cx="75" cy="8" r="1.5" fill="var(--border-strong)"/>
+            <line class="d-line" x1="24" y1="24" x2="42" y2="24"/>
+            <line class="d-line" x1="46" y1="24" x2="72" y2="24" opacity="0.4"/>
+            <line class="d-line" x1="24" y1="32" x2="40" y2="32" opacity="0.4"/>
+            <line class="d-line" x1="24" y1="40" x2="46" y2="40" opacity="0.35"/>
+            <line class="d-line" x1="24" y1="48" x2="36" y2="48" opacity="0.4"/>
+            <rect class="d-block" x="24" y="55" width="44" height="20" rx="2" opacity="0.5"/>
+            <line class="d-line" x1="28" y1="62" x2="54" y2="62"/>
+            <line class="d-line" x1="28" y1="69" x2="46" y2="69" opacity="0.5"/>
+            <path class="d-body" d="M1 89C1 87.3 2.3 86 4 86L146 86C147.7 86 149 87.3 149 89L150 99C150 100.7 148.7 102 147 102L3 102C1.3 102 0 100.7 0 99Z"/>
+            <rect class="d-block" x="59" y="91" width="32" height="6" rx="3" opacity="0.5"/>
+          </svg>
+          <span class="device-name">laptop</span>
+        </div>
+      </div>
+    </section>
+    <hr class="divider" />
+    <section id="software">
+      <p class="section-label reveal">Software &amp; AI</p>
+      <div class="tools-grid">
+
+        <div class="tool-card reveal reveal-delay-1">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--cursor" aria-hidden="true"></span>
+            <span class="tool-name">Cursor</span>
+          </div>
+          <div class="tool-desc">AI-first code editor. Where I write basically everything.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-2">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--visualstudiocode" aria-hidden="true"></span>
+            <span class="tool-name">VS Code</span>
+          </div>
+          <div class="tool-desc">Debugging, extensions, and lighter edits when I reach for a classic editor.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-3">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--anthropic" aria-hidden="true"></span>
+            <span class="tool-name">Claude</span>
+          </div>
+          <div class="tool-desc">Anthropic's model. Best for reasoning, writing, and long context.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-4">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--git" aria-hidden="true"></span>
+            <span class="tool-name">Git</span>
+          </div>
+          <div class="tool-desc">Branches, commits, and history—local workflow for every repo.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-5">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--github" aria-hidden="true"></span>
+            <span class="tool-name">GitHub</span>
+          </div>
+          <div class="tool-desc">Remotes, PRs, and Actions—where code lands and deploys get triggered.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-6">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--docker" aria-hidden="true"></span>
+            <span class="tool-name">Docker</span>
+          </div>
+          <div class="tool-desc">Containers for consistent local dev and matching prod-ish environments.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-7">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--vercel" aria-hidden="true"></span>
+            <span class="tool-name">Vercel</span>
+          </div>
+          <div class="tool-desc">Deploy on push. This site lives here.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-8">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--notion" aria-hidden="true"></span>
+            <span class="tool-name">Notion</span>
+          </div>
+          <div class="tool-desc">Notes, project tracking, personal OS.</div>
+        </div>
+
+        <div class="tool-card reveal reveal-delay-9">
+          <div class="tool-card-top">
+            <span class="tool-icon tool-icon--figma" aria-hidden="true"></span>
+            <span class="tool-name">Figma</span>
+          </div>
+          <div class="tool-desc">Wireframes and quick design exploration.</div>
+        </div>
+
+      </div>
+    </section>
+    <hr class="divider" />
+    <section id="languages">
+      <p class="section-label reveal">Languages</p>
+      <div class="langs-list reveal reveal-delay-1">
+        <span class="lang-pill"><span class="lang-icon lang-icon--javascript" aria-hidden="true"></span>JavaScript</span>
+        <span class="lang-pill"><span class="lang-icon lang-icon--typescript" aria-hidden="true"></span>TypeScript</span>
+        <span class="lang-pill"><span class="lang-icon lang-icon--python" aria-hidden="true"></span>Python</span>
+        <span class="lang-pill"><span class="lang-icon lang-icon--java" aria-hidden="true"></span>Java</span>
+        <span class="lang-pill"><span class="lang-icon lang-icon--html" aria-hidden="true"></span>HTML</span>
+        <span class="lang-pill"><span class="lang-icon lang-icon--css" aria-hidden="true"></span>CSS</span>
+        <span class="lang-pill"><span class="lang-icon lang-icon--swift" aria-hidden="true"></span>Swift</span>
+      </div>
+    </section>
+    <footer class="reveal">
+      <span>enzo hiu &middot; 2026</span>
+      <span>cornell cs '28</span>
+    </footer>
+  </main>
+</div>
+
+<div id="overlay"></div>
+<div class="spec-popup" id="popup-desktop">
+  <div class="popup-head"><span class="popup-title">desktop</span><button class="popup-close" onclick="closePopup()">&#x2715;</button></div>
+  <div class="spec-row"><span class="spec-k">cpu</span><span class="spec-v">&#8212; update me</span></div>
+  <div class="spec-row"><span class="spec-k">gpu</span><span class="spec-v">&#8212; update me</span></div>
+  <div class="spec-row"><span class="spec-k">ram</span><span class="spec-v">&#8212; update me</span></div>
+  <div class="spec-row"><span class="spec-k">storage</span><span class="spec-v">&#8212; update me</span></div>
+  <div class="spec-row"><span class="spec-k">monitor</span><span class="spec-v">&#8212; update me</span></div>
+  <div class="spec-row"><span class="spec-k">os</span><span class="spec-v">&#8212; update me</span></div>
+</div>
+<div class="spec-popup" id="popup-laptop">
+  <div class="popup-head"><span class="popup-title">laptop</span><button class="popup-close" onclick="closePopup()">&#x2715;</button></div>
+  <div class="spec-row"><span class="spec-k">model</span><span class="spec-v">MacBook Pro 14&quot;</span></div>
+  <div class="spec-row"><span class="spec-k">chip</span><span class="spec-v">Apple M3 Pro</span></div>
+  <div class="spec-row"><span class="spec-k">ram</span><span class="spec-v">18 GB unified</span></div>
+  <div class="spec-row"><span class="spec-k">storage</span><span class="spec-v">512 GB SSD</span></div>
+  <div class="spec-row"><span class="spec-k">display</span><span class="spec-v">14.2&quot; Liquid Retina XDR</span></div>
+  <div class="spec-row"><span class="spec-k">os</span><span class="spec-v">macOS Sequoia</span></div>
+</div>
+
+<script>
+const toggle=document.getElementById('themeToggle'),label=document.getElementById('themeLabel'),html=document.documentElement;
+function applyTheme(t){html.setAttribute('data-theme',t);label.textContent=t==='dark'?'light':'dark';try{localStorage.setItem('theme',t)}catch(_){}}
+try{const s=localStorage.getItem('theme');if(s==='light'||s==='dark')applyTheme(s)}catch(_){}
+toggle.addEventListener('click',()=>applyTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+const obs=new IntersectionObserver(entries=>{entries.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:0.05,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('.reveal:not(.visible)').forEach(el=>el.classList.add('visible')),1200);
+const glowObs=new IntersectionObserver(entries=>{entries.forEach(e=>e.target.classList.toggle('section-label--glow',e.isIntersecting))},{threshold:0.35,rootMargin:'-8% 0px -45% 0px'});
+document.querySelectorAll('.section-label').forEach(el=>glowObs.observe(el));
+const overlay=document.getElementById('overlay');
+let activeId=null;
+function openPopup(id){
+  if(activeId)closePopup();
+  const popup=document.getElementById('popup-'+id),rect=document.getElementById('dev-'+id).getBoundingClientRect();
+  const pw=268,ph=popup.offsetHeight||220;
+  let left=rect.right+12,top=rect.top+rect.height/2-ph/2;
+  if(left+pw>window.innerWidth-12){left=rect.left+rect.width/2-pw/2;top=rect.top-ph-12}
+  top=Math.max(12,Math.min(top,window.innerHeight-ph-12));
+  left=Math.max(12,Math.min(left,window.innerWidth-pw-12));
+  popup.style.top=top+'px';popup.style.left=left+'px';
+  popup.classList.add('open');overlay.classList.add('on');activeId=id;
+}
+function closePopup(){
+  if(!activeId)return;
+  document.getElementById('popup-'+activeId).classList.remove('open');
+  overlay.classList.remove('on');activeId=null;
+}
+['desktop','laptop'].forEach(id=>{
+  const el=document.getElementById('dev-'+id);
+  el.addEventListener('click',()=>activeId===id?closePopup():openPopup(id));
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPopup(id)}});
+});
+overlay.addEventListener('click',closePopup);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePopup()});
+</script>
+</body>
+</html>
