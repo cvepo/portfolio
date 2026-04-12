@@ -144,6 +144,9 @@ html, body {
 .panel-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
 .panel-pill { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-2); border: 1px solid var(--border); border-radius: 4px; padding: 3px 9px; background: var(--surface); transition: border-color 0.15s; }
 .panel-pill:hover { border-color: var(--border-strong); }
+.panel-challenges { margin: 0 0 4px; padding-left: 18px; }
+.panel-challenges li { font-size: 14px; color: var(--text-2); line-height: 1.8; padding-left: 4px; }
+.panel-challenges li + li { margin-top: 4px; }
 .panel-links { display: flex; gap: 8px; flex-wrap: wrap; }
 .panel-link { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-2); border: 1px solid var(--border); border-radius: 6px; padding: 7px 14px; background: var(--surface); text-decoration: none; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 5px; transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s; }
 .panel-link:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface2); transform: translateY(-1px); }
@@ -589,6 +592,11 @@ function boot(PROJECTS) {
         <div class="panel-highlight-label">${p.highlight.label}</div>
         <div class="panel-highlight-text">${p.highlight.text}</div>
       </div>
+      ${p.challenges && p.challenges.length ? `
+      <div class="panel-divider"></div>
+      <div class="panel-section-label">challenges</div>
+      <ul class="panel-challenges">${p.challenges.map(c => `<li>${c}</li>`).join("")}</ul>
+      ` : ""}
       <div class="panel-divider"></div>
       <div class="panel-section-label">details</div>
       <div class="panel-meta">${p.meta.map(m => `<div class="meta-cell"><div class="meta-cell-label">${m.label}</div><div class="meta-cell-value">${m.value}</div></div>`).join("")}</div>
