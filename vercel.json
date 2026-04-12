@@ -1,7 +1,15 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/Portfolio/main.html" },
+    { "source": "/main", "destination": "/Portfolio/main.html" },
+    { "source": "/toolbox", "destination": "/Portfolio/toolbox.html" },
+    { "source": "/projects", "destination": "/Portfolio/projects.html" },
+    { "source": "/wip", "destination": "/Portfolio/wip.html" }
+  ],
   "redirects": [
+    { "source": "/index.html", "destination": "/main", "permanent": true },
     { "source": "/toolbox.html", "destination": "/toolbox", "permanent": true },
     { "source": "/projects.html", "destination": "/projects", "permanent": true },
     { "source": "/wip.html", "destination": "/wip", "permanent": true }

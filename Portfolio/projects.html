@@ -159,21 +159,21 @@ html, body {
 <body class="page-projects">
 
 <nav class="sidenav">
-  <a href="index.html#top" class="nav-name">enzo hiu</a>
+  <a href="/main#top" class="nav-name">enzo hiu</a>
   <ul class="nav-links">
     <li class="nav-block">
       <a href="https://vepo.studio/" class="nav-main-link">main</a>
       <ul class="nav-sub">
-        <li><a href="index.html#about">about</a></li>
-        <li><a href="index.html#projects">projects</a></li>
-        <li><a href="index.html#experience">experience</a></li>
-        <li><a href="index.html#contact">contact</a></li>
+        <li><a href="/main#about">about</a></li>
+        <li><a href="/main#projects">projects</a></li>
+        <li><a href="/main#experience">experience</a></li>
+        <li><a href="/main#contact">contact</a></li>
       </ul>
     </li>
-    <li class="nav-projects-item"><a href="projects.html" class="active">projects&nbsp;🚧</a></li>
-    <li class="nav-toolbox-item"><a href="toolbox.html">toolbox</a></li>
+    <li class="nav-projects-item"><a href="/projects" class="active">projects&nbsp;🚧</a></li>
+    <li class="nav-toolbox-item"><a href="/toolbox">toolbox</a></li>
     <!-- Nav order: keep wip as the last list item. Add new links above wip unless one should go after it. -->
-    <li class="nav-wip-item"><a href="wip.html">wip</a></li>
+    <li class="nav-wip-item"><a href="/wip">wip</a></li>
   </ul>
   <div class="nav-bottom">
     <button class="theme-btn" id="themeToggle">
@@ -225,7 +225,7 @@ document.getElementById("themeToggle").addEventListener("click", () => {
   applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
 });
 
-fetch("projects.json")
+fetch("/projects.json")
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
   .then((data) => {
     if (!data.length) throw new Error("no projects");

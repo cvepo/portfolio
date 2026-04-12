@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/Portfolio/main.html" },
+    { "source": "/main", "destination": "/Portfolio/main.html" },
+    { "source": "/toolbox", "destination": "/Portfolio/toolbox.html" },
+    { "source": "/projects", "destination": "/Portfolio/projects.html" },
+    { "source": "/wip", "destination": "/Portfolio/wip.html" }
+  ]
+}
