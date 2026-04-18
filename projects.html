@@ -176,10 +176,8 @@ html, body {
       </ul>
     </li>
     <li class="nav-projects-item"><a href="/projects" class="active">projects&nbsp;🚧</a></li>
-    <li class="nav-toolbox-item"><a href="/toolbox">toolbox</a></li>
-    <!-- Nav order: keep wip as the last list item. Add new links above wip unless one should go after it. -->
-    <li class="nav-wip-item"><a href="/wip">wip</a></li>
-  </ul>
+      <li class="nav-toolbox-item"><a href="/toolbox">toolbox</a></li>
+    </ul>
   <div class="nav-bottom">
     <button class="theme-btn" id="themeToggle">
       <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -249,7 +247,7 @@ function boot(PROJECTS) {
 
   const DRAG_ACCEL = 0.22;
   const FRICTION = 0.935;
-  const MAX_VEL = 0.066;
+  const MAX_VEL = 0.099;
   const DRAG_SCALE = 0.0072;
 
   /** Delay before the entrance timeline starts so layout/paint can settle (reduces rAF clumping). */

@@ -46,9 +46,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .sidenav{position:sticky;top:0;align-self:flex-start;width:192px;flex-shrink:0;height:100vh;padding:48px 0 40px 28px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--bg);transition:background var(--transition),border-color var(--transition);z-index:100}
 .nav-name{font-family:'Geist Mono',monospace;font-size:13px;font-weight:500;color:var(--text);text-decoration:none;letter-spacing:-0.02em;margin-bottom:40px;opacity:0;animation:fadeDown 0.5s 0.1s ease forwards}
 .nav-links{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
-.nav-links>.nav-block,.nav-links>.nav-projects-item,.nav-links>.nav-wip-item,.nav-links>.nav-toolbox-item{opacity:0;animation:fadeRight 0.4s ease forwards}
+.nav-links>.nav-block,.nav-links>.nav-projects-item,.nav-links>.nav-toolbox-item{opacity:0;animation:fadeRight 0.4s ease forwards}
 .nav-links>.nav-block{animation-delay:0.2s}.nav-links>.nav-projects-item{animation-delay:0.44s}
-.nav-links>.nav-toolbox-item{animation-delay:0.52s}.nav-links>.nav-wip-item{animation-delay:0.6s}
+.nav-links>.nav-toolbox-item{animation-delay:0.6s}
 .nav-sub li{opacity:0;animation:fadeRight 0.4s ease forwards}
 .nav-sub li:nth-child(1){animation-delay:0.26s}.nav-sub li:nth-child(2){animation-delay:0.3s}
 .nav-sub li:nth-child(3){animation-delay:0.34s}.nav-sub li:nth-child(4){animation-delay:0.38s}
@@ -56,7 +56,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .nav-main-link{font-weight:500;color:var(--text-2)}
 .nav-main-link.active{color:var(--text)}
 .nav-sub{list-style:none;margin:0;padding:0 0 0 12px;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
-.page-main .nav-projects-item a.active,.page-main .nav-wip-item a.active,.page-main .nav-toolbox-item a.active{color:var(--text)}
+.page-main .nav-projects-item a.active,.page-main .nav-toolbox-item a.active{color:var(--text)}
 .nav-links a{font-family:'Geist Mono',monospace;font-size:12px;color:var(--text-3);text-decoration:none;letter-spacing:-0.01em;padding:5px 0;display:flex;align-items:center;gap:8px;transition:color 0.15s}
 .nav-links a::before{content:'';width:0;height:1px;background:currentColor;transition:width 0.2s ease;flex-shrink:0}
 .nav-links a:hover{color:var(--text)}.nav-links a:hover::before,.nav-links a.active::before{width:14px}.nav-links a.active{color:var(--text)}
@@ -164,8 +164,6 @@ footer span{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-3
       </li>
       <li class="nav-projects-item"><a href="/projects">projects&nbsp;🚧</a></li>
       <li class="nav-toolbox-item"><a href="/toolbox" class="active">toolbox</a></li>
-      <!-- Nav order: keep wip as the last list item. Add new links above wip unless one should go after it. -->
-      <li class="nav-wip-item"><a href="/wip">wip</a></li>
     </ul>
     <div class="nav-bottom">
       <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
